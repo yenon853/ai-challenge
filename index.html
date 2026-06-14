@@ -119,6 +119,20 @@
   .charhint{font-size:.76rem;color:var(--faint);margin-top:6px}
   .charhint.ok{color:var(--ok)}
   .commitrow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .quiz{margin-top:16px;background:rgba(232,163,61,.06);border:1px solid rgba(232,163,61,.26);border-radius:16px;padding:16px 18px}
+  .quiz .qq{font-weight:900;margin-bottom:12px;color:#f5ecdf;font-size:1.05rem}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{appearance:none;cursor:pointer;text-align:right;font-family:inherit;font-size:.98rem;font-weight:600;color:var(--ink);
+    background:rgba(0,0,0,.26);border:1px solid var(--line2);border-radius:12px;padding:13px 16px;transition:.15s;display:flex;gap:10px;align-items:flex-start}
+  .opt:hover:not(:disabled){border-color:var(--amber);background:rgba(232,163,61,.1);transform:translateX(-2px)}
+  .opt:disabled{cursor:default}
+  .opt.right{border-color:var(--ok);background:rgba(82,185,166,.16);color:#cbf3e8}
+  .opt.wrong{border-color:var(--rose);background:rgba(207,138,166,.14)}
+  .opt::before{content:attr(data-letter);font-weight:900;color:var(--amber2);flex:none}
+  .opt.right::before{color:var(--ok)}
+  .qfb{margin-top:13px;font-weight:700;font-size:.95rem;min-height:1.2em;line-height:1.5}
+  .qfb.ok{color:var(--ok)}
+  .qfb.no{color:var(--rose)}
 
   .reveal{display:none;margin-top:16px}
   .day.done .reveal{display:block}
@@ -328,6 +342,10 @@ const DAYS=[
   prompt:"כתבו במילים שלכם — מה הבנתם:",
   expandTitle:"איך מתגברים על מלכודת ה'הבא'?",
   expand:["המוח מבלבל בין 'מוכר' ל'ידוע'. כשהכול חלק וקל נוצרת 'אשליית מסוגלות' — אנחנו בטוחים שהבנו, אבל לא נצליח לשלוף את זה מאוחר יותר.","הפתרון: 'חיכוך מועיל' (desirable difficulties) — מכשול קטן ומכוון שמאלץ עיבוד אקטיבי, ומחזק את הקידוד לזיכרון לטווח ארוך.","שלוש טכניקות פרקטיות: (1) לפני 'הבא' — נסחו משפט סיכום במילים שלכם. (2) הסבירו את הרעיון בקול, כאילו אתם מלמדים מישהו. (3) בדקו את עצמכם בלי להציץ.","בעיצוב למידה לתלמידים: שלבו 'נקודות עצירה' — שאלה, משימה קצרה או רפלקציה — במקום מעבר אוטומטי. (האתר הזה עצמו בנוי בדיוק כך 😉)"],
+  quiz:{q:"למה דווקא ממשק 'חלק' וקל מדי מזיק ללמידה?",opts:[
+    {t:"כי הוא יוצר 'אשליית מסוגלות' — מזהים את החומר אך לא זוכרים אותו",ok:true,fb:"בדיוק! המוח מבלבל בין 'מוכר' ל'ידוע'. חיכוך קטן ומכוון מאלץ עיבוד ומחזק זיכרון."},
+    {t:"כי תוכן קל הוא תמיד שגוי",ok:false,fb:"לא — קושי אינו ערובה לדיוק. הבעיה היא היעדר עיבוד אקטיבי."},
+    {t:"כי מסכים מהירים מזיקים לעיניים",ok:false,fb:"לא קשור — הבעיה כאן קוגניטיבית, לא פיזית."}]},
   src:{label:"Bjork & Bjork — חיכוך מועיל בלמידה",url:"https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf"}},
 
  {idx:2,icon:"🔒",c1:"#52b9a6",c2:"#2f8f7f",
@@ -339,6 +357,10 @@ const DAYS=[
   prompt:"הדביקו כאן את המשפט ה'אנונימי' שכתבתם:",
   expandTitle:"למה זה קריטי?",
   expand:["ההנחיות האתיות של האיחוד האירופי נשענות על: סוכנות אנושית, שקיפות, הוגנות, פרטיות ואחריותיות.","רוב כלי ה-AI הציבוריים אינם מאושרים לעיבוד מידע אישי של קטינים — לכן מתארים מצב אנונימי.","ומודלים יכולים לשכפל הטיות — תפקידנו לבחון את הפלט בעין ביקורתית."],
+  quiz:{q:"מהו הכלל הבטוח ביותר כשמשתמשים ב-AI עם מידע על תלמידים?",opts:[
+    {t:"לא להזין שום פרט מזהה — לתאר מצב באופן אנונימי",ok:true,fb:"נכון! אנונימיזציה שומרת על פרטיות התלמיד, והתשובה לרוב טובה בדיוק כמו קודם."},
+    {t:"להזין הכול — הצ'אט פרטי ממילא",ok:false,fb:"מסוכן: מה שמוזן יוצא מרשותנו, ורוב הכלים אינם מאושרים למידע על קטינים."},
+    {t:"להזין רק את שם המשפחה",ok:false,fb:"עדיין פרט מזהה. הימנעו מכל פרט שמאפשר זיהוי."}]},
   src:{label:"הנחיות אתיות · האיחוד האירופי",url:"https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence"}},
 
  {idx:3,icon:"🔍",c1:"#dd8b58",c2:"#b9622f",
@@ -350,6 +372,10 @@ const DAYS=[
   prompt:"מה ההזיה / הטעות הכי משכנעת שתפסתם?",
   expandTitle:"מהי \"הזיה\" ולמה היא קורית?",
   expand:["הנחיות אונסק\"ו לבינה יוצרת מדגישות: הכלים מייצרים תוכן סטטיסטית-סביר, לא מאומת — ולכן עלול להיות שגוי או בדוי.","המצאת מקורות (ציטוטים שלא קיימים) מסוכנת בחינוך כי היא נראית אמינה.","המסקנה: ה-AI נקודת פתיחה מצוינת ונקודת סיום גרועה. תמיד מצליבים מול מקור מוסמך."],
+  quiz:{q:"ה-AI נתן 'מקור' עם שם מחבר ושנה. מה עושים?",opts:[
+    {t:"מאמתים שהמקור באמת קיים לפני שמשתמשים בו",ok:true,fb:"מצוין! AI מנבא טקסט סביר, לא אמת מאומתת — תמיד מצליבים מול מקור חיצוני."},
+    {t:"סומכים עליו, הוא נשמע מדויק",ok:false,fb:"דווקא הביטחון מטעה: AI בודה מקורות שנראים אמינים לגמרי."},
+    {t:"מבקשים מה-AI עוד מקורות לאימות",ok:false,fb:"מקור נוסף מאותו AI אינו אימות. מצליבים מול מקור חיצוני מוסמך."}]},
   src:{label:"הנחיות אונסק\"ו לבינה יוצרת",url:"https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research"}},
 
  {idx:4,icon:"🎓",c1:"#cdab3f",c2:"#a3851f",
@@ -361,6 +387,10 @@ const DAYS=[
   prompt:"איזו גרסה הפתיעה אתכם, ולמה?",
   expandTitle:"שילוב פדגוגי נכון",
   expand:["ממד הפדגוגיה עוסק בשילוב AI לאורך כל ההוראה — מתכנון ועד הערכה.","הבדלה (Differentiation) היא שימוש בעל ערך גבוה: AI מקצר דרמטית את הזמן ליצירת חומרים בכמה רמות.","ה-AI מייצר טיוטה, המורה מבצע התאמה פדגוגית — זה הסוד. כך מקדמים הכלה ושוויון הזדמנויות."],
+  quiz:{q:"ה-AI יצר פעילות ב-3 רמות. מה תפקיד המורה עכשיו?",opts:[
+    {t:"לבצע התאמה פדגוגית — לשפה, לרמת הכיתה ולהקשר",ok:true,fb:"בדיוק! ה-AI נותן טיוטה, וההתאמה לכיתה הספציפית היא הערך המוסף שלכם."},
+    {t:"להעתיק ולהשתמש בדיוק כמו שזה",ok:false,fb:"חבל — בלי התאמה לכיתה מאבדים את עיקר הערך הפדגוגי."},
+    {t:"לתת לכולם את הרמה הקשה ביותר",ok:false,fb:"זה ההפך מהבדלה — המטרה היא להתאים לכל תלמיד."}]},
   src:{label:"מסגרת אונסק\"ו · ממד הפדגוגיה",url:"https://www.unesco.org/en/articles/ai-competency-framework-teachers"}},
 
  {idx:5,icon:"🚀",c1:"#cf8aa6",c2:"#a85f7e",
@@ -372,6 +402,10 @@ const DAYS=[
   prompt:"כתבו כאן את ההרגל שלכם:",
   expandTitle:"ללמוד עם AI, לא רק עליו",
   expand:["הממד החמישי עוסק בשימוש ב-AI לצמיחה המקצועית של המורה עצמו.","התפתחות מקצועית היא רצף: לרכוש, להעמיק, ליצור — מתחילים קטן.","שיתוף עם עמיתים מכפיל את האפקט. משרד החינוך מציע קורסים והדרכות — נקודת המשך מצוינת."],
+  quiz:{q:"מה הדרך היעילה להטמיע הרגל AI חדש לשנה הבאה?",opts:[
+    {t:"הרגל קטן וקבוע אחד — ולשתף עמית/ה",ok:true,fb:"נכון! התמדה קטנה ועקבית, עם שיתוף עמיתים, מנצחת כל 'מהפכה' חד-פעמית."},
+    {t:"לאמץ עשרה כלים חדשים בבת אחת",ok:false,fb:"עומס גדול מדי נוטה להישכח. מתחילים קטן ובונים בהדרגה."},
+    {t:"לחכות שיחייבו אותנו מלמעלה",ok:false,fb:"הצמיחה המקצועית מתחילה ביוזמה אישית קטנה."}]},
   src:{label:"בינה מלאכותית · משרד החינוך",url:"https://pop.education.gov.il/sherutey-tiksuv-bachinuch/creative-artificial-intelligence/"}}
 ];
 const MINCHARS=12;
@@ -449,15 +483,16 @@ function renderDays(){
       <p class="principle">${d.principle}</p>
 
       <div class="task">
-        <div class="ttl">🎯 האתגר של היום</div>
+        <div class="ttl">💡 לעשייה מהירה</div>
         <p>${d.task}</p>
-        <div class="timepill">⏱️ כמה דקות</div>
-        <textarea data-refl="${d.idx}" ${done?'readonly':''} placeholder="${esc(d.prompt)}">${esc(refl)}</textarea>
-        <div class="charhint ${refl.length>=MINCHARS?'ok':''}" data-hint="${d.idx}">${refl.length>=MINCHARS?'✓ אפשר לגלות':('כתבו עוד '+Math.max(0,MINCHARS-refl.length)+' תווים')}</div>
-        <div class="commitrow">
-          ${done?`<span style="color:var(--ok);font-weight:800">✓ הושלם 🎉</span>`
-                :`<button class="btn primary" data-commit="${d.idx}" disabled>✨ גיליתי! חשפו את ההרחבה</button>`}
+      </div>
+
+      <div class="quiz" data-quiz="${d.idx}">
+        <div class="qq">❓ ${d.quiz.q}</div>
+        <div class="opts">
+          ${d.quiz.opts.map((o,oi)=>`<button class="opt${done&&o.ok?' right':''}" data-oi="${oi}" data-ok="${o.ok?1:0}" data-letter="${'אבגד'[oi]}" ${done?'disabled':''}>${o.t}</button>`).join('')}
         </div>
+        <div class="qfb ${done?'ok':''}" data-fb="${d.idx}">${done?('✓ '+d.quiz.opts.find(x=>x.ok).fb):''}</div>
       </div>
 
       <div class="reveal">
@@ -469,24 +504,28 @@ function renderDays(){
  });
  wireDays();updateProgress();
 }
-function canCommit(idx){return (state['refl_'+idx]||'').trim().length>=MINCHARS;}
-function refreshCommit(idx){const b=daysEl.querySelector(`[data-commit="${idx}"]`);if(b)b.disabled=!canCommit(idx);}
 function wireDays(){
- daysEl.querySelectorAll('textarea[data-refl]').forEach(t=>{
-  t.addEventListener('input',()=>{
-   const idx=t.getAttribute('data-refl');state['refl_'+idx]=t.value;save();
-   const h=daysEl.querySelector(`[data-hint="${idx}"]`);
-   if(h){const ok=t.value.trim().length>=MINCHARS;h.classList.toggle('ok',ok);h.textContent=ok?'✓ אפשר לגלות':('כתבו עוד '+Math.max(0,MINCHARS-t.value.trim().length)+' תווים');}
-   refreshCommit(idx);
+ daysEl.querySelectorAll('.quiz').forEach(q=>{
+  const idx=q.getAttribute('data-quiz');
+  q.querySelectorAll('.opt').forEach(b=>{
+   b.addEventListener('click',()=>{
+    if(isDone(idx))return;
+    const ok=b.getAttribute('data-ok')==='1';
+    const oi=+b.getAttribute('data-oi');
+    const opt=DAYS.find(d=>d.idx==idx).quiz.opts[oi];
+    const fb=q.querySelector('.qfb');
+    q.querySelectorAll('.opt').forEach(x=>x.classList.remove('wrong'));
+    if(ok){
+     b.classList.add('right');fb.className='qfb ok';fb.textContent='✓ '+opt.fb;
+     q.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+     state['done_'+idx]=true;save();
+     document.getElementById('day'+idx).classList.add('done');
+     burst();toast('תשובה נכונה! 🎉');updateProgress();
+    }else{
+     b.classList.add('wrong');fb.className='qfb no';fb.textContent='✗ '+opt.fb+' נסו שוב 🙂';
+    }
+   });
   });
- });
- daysEl.querySelectorAll('[data-commit]').forEach(b=>{
-  b.addEventListener('click',()=>{
-   const idx=b.getAttribute('data-commit');if(!canCommit(idx))return;
-   state['done_'+idx]=true;save();burst();toast('אתגר הושלם! 🎉');renderDays();
-   setTimeout(()=>{const t=document.getElementById('day'+idx);t&&t.scrollIntoView({behavior:'smooth',block:'center'});},120);
-  });
-  refreshCommit(b.getAttribute('data-commit'));
  });
 }
 
