@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>חמישה ימים · מסע סוף שנה ל-AI בכיתה</title>
+<meta name="description" content="אתגר סוף שנה לצוות המורים: 5 ימים, 5 עקרונות ללמידה דיגיטלית עם בינה מלאכותית. אתר שמעוצב עם 'חיכוך מועיל' — כל יום נפתח רק אחרי שעובדים באמת." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#14110f; --bg2:#1b1714; --card:#221c17; --card2:#2a221b;
+    --ink:#f5ecdf; --muted:#b6a88f; --faint:#8a7d68;
+    --line:rgba(245,236,223,.10); --line2:rgba(245,236,223,.16);
+    --amber:#e8a33d; --amber2:#f3bd66; --teal:#52b9a6; --rose:#cf8aa6; --terra:#dd8b58; --gold:#cdab3f;
+    --ok:#52b9a6; --lock:#6e6253;
+    --shadow:0 24px 60px rgba(0,0,0,.5);
+    --maxw:1060px; --r:20px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); line-height:1.7;
+    font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    background-image:
+      radial-gradient(900px 500px at 88% -8%, rgba(232,163,61,.10), transparent 60%),
+      radial-gradient(800px 500px at 4% 8%, rgba(82,185,166,.08), transparent 55%);
+    background-attachment:fixed; min-height:100vh;
+  }
+  /* subtle paper grain */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  body>*{position:relative;z-index:2}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .serif{font-family:"Frank Ruhl Libre",Georgia,serif}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(20,17,15,.74);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 22px;max-width:var(--maxw);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.2px}
+  .mark{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:1.3rem;
+    color:#1a1611;background:linear-gradient(140deg,var(--amber2),var(--amber));box-shadow:0 8px 22px rgba(232,163,61,.35)}
+  nav.links{display:flex;gap:4px;flex-wrap:wrap}
+  nav.links a{font-size:.9rem;color:var(--muted);text-decoration:none;padding:8px 13px;border-radius:10px;font-weight:600;transition:.18s}
+  nav.links a:hover{color:var(--ink);background:rgba(245,236,223,.06)}
+
+  /* HERO */
+  .hero{padding:64px 0 26px}
+  .heroin{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center}
+  @media(max-width:860px){.heroin{grid-template-columns:1fr;gap:26px}}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.82rem;color:var(--amber2);
+    background:rgba(232,163,61,.08);border:1px solid rgba(232,163,61,.28);padding:7px 14px;border-radius:999px;margin-bottom:20px}
+  .pulse{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(232,163,61,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,163,61,.5)}70%{box-shadow:0 0 0 12px rgba(232,163,61,0)}100%{box-shadow:0 0 0 0 rgba(232,163,61,0)}}
+  h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:clamp(2.3rem,6vw,4rem);line-height:1.08;margin:.05em 0 .3em;letter-spacing:-.5px}
+  h1 em{font-style:normal;color:var(--amber2)}
+  .lead{color:var(--muted);font-size:1.14rem;max-width:560px;margin:0 0 28px}
+  .ctarow{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:1rem;text-decoration:none;
+    padding:14px 24px;border-radius:13px;display:inline-flex;align-items:center;gap:9px;transition:.18s;letter-spacing:-.2px}
+  .btn.primary{background:linear-gradient(140deg,var(--amber2),var(--amber));color:#1a1410;box-shadow:0 12px 28px rgba(232,163,61,.32)}
+  .btn.primary:hover{transform:translateY(-2px)}
+  .btn.ghost{background:rgba(245,236,223,.05);border:1px solid var(--line2);color:var(--ink)}
+  .btn.ghost:hover{background:rgba(245,236,223,.1)}
+  .btn[disabled]{opacity:.4;cursor:not-allowed;transform:none!important}
+
+  .herocard{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+  .herocard h3{margin:0 0 4px;font-size:.78rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);font-weight:800}
+  .clock{display:flex;gap:8px;margin:10px 0 22px}
+  .unit{flex:1;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
+  .unit b{display:block;font-family:"Frank Ruhl Libre",serif;font-size:1.7rem;font-weight:900;font-variant-numeric:tabular-nums;color:var(--amber2)}
+  .unit span{font-size:.66rem;color:var(--muted)}
+  .ring-wrap{display:flex;align-items:center;gap:16px}
+  .ring{position:relative;width:84px;height:84px;flex:none}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:1.3rem}
+  .ring .pct small{display:block;text-align:center;font-size:.55rem;color:var(--muted);font-family:"Heebo"}
+  .rpline{font-size:.86rem;color:var(--muted)}
+  .rpline b{color:var(--ink)}
+
+  section{padding:46px 0}
+  .sechead{margin-bottom:30px;max-width:680px}
+  .sechead h2{font-family:"Frank Ruhl Libre",serif;font-size:clamp(1.7rem,4vw,2.5rem);margin:0 0 8px;font-weight:900;letter-spacing:-.4px}
+  .sechead p{color:var(--muted);margin:0}
+  .kicker{font-size:.78rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--amber);font-weight:800;margin-bottom:8px}
+
+  /* HOW IT WORKS / friction strip */
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+  @media(max-width:760px){.how{grid-template-columns:1fr 1fr}}
+  .howcard{background:rgba(245,236,223,.035);border:1px solid var(--line);border-radius:16px;padding:16px 16px}
+  .howcard .ic{font-size:1.4rem}
+  .howcard b{display:block;margin:6px 0 4px;font-size:.98rem}
+  .howcard span{font-size:.83rem;color:var(--muted)}
+
+  /* DAY CARD */
+  .day{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:24px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px;position:relative;transition:.25s}
+  .day.done{border-color:rgba(82,185,166,.5)}
+  .day.locked{filter:saturate(.4)}
+  .daygrid{display:grid;grid-template-columns:280px 1fr}
+  @media(max-width:780px){.daygrid{grid-template-columns:1fr}}
+  .dayvisual{position:relative;display:grid;place-items:center;padding:18px;border-left:1px solid var(--line)}
+  @media(max-width:780px){.dayvisual{border-left:0;border-bottom:1px solid var(--line)}}
+  .dayvisual svg{width:100%;height:auto;border-radius:16px;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .daybody{padding:26px 28px}
+  .dchip{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.78rem;padding:6px 12px;border-radius:999px;
+    background:rgba(232,163,61,.12);border:1px solid rgba(232,163,61,.3);color:var(--amber2);margin-bottom:12px}
+  .day h3{font-family:"Frank Ruhl Libre",serif;font-size:1.6rem;margin:.1em 0 .15em;font-weight:900;letter-spacing:-.4px;line-height:1.2}
+  .dim{font-size:.8rem;color:var(--faint);font-weight:700;margin-bottom:4px}
+  .trigger{color:#f2e9da;font-size:1.04rem;font-weight:600;border-right:3px solid var(--amber);background:rgba(232,163,61,.06);border-radius:0 12px 12px 0;padding:12px 14px;margin:14px 0}
+  .principle{color:var(--muted);margin:0 0 4px}
+
+  /* FRICTION FLOW */
+  .flow{margin-top:18px;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:rgba(0,0,0,.16)}
+  .step{padding:16px 18px;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .stepttl{display:flex;align-items:center;gap:10px;font-weight:800;margin-bottom:6px}
+  .stepnum{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:.85rem;background:rgba(232,163,61,.16);color:var(--amber2);font-weight:900;flex:none}
+  .challenge-list{margin:6px 0 0;padding-right:20px;color:var(--muted)}
+  .challenge-list li{margin:5px 0}
+  .timepill{font-size:.78rem;color:var(--amber2);font-weight:700;margin-top:8px;display:inline-flex;gap:6px;align-items:center}
+  textarea{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--line2);border-radius:12px;color:var(--ink);
+    font-family:inherit;font-size:.98rem;padding:12px 14px;resize:vertical;min-height:84px;margin-top:8px}
+  textarea:focus{outline:none;border-color:var(--amber)}
+  .charhint{font-size:.76rem;color:var(--faint);margin-top:6px}
+  .charhint.ok{color:var(--ok)}
+  .conf{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .conf button{appearance:none;cursor:pointer;font-family:inherit;background:rgba(245,236,223,.05);border:1px solid var(--line2);
+    color:var(--ink);border-radius:11px;padding:9px 14px;font-weight:700;transition:.15s}
+  .conf button:hover{border-color:var(--amber)}
+  .conf button.sel{background:linear-gradient(140deg,var(--amber2),var(--amber));color:#1a1410;border-color:transparent}
+  .commitrow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .lockedhint{font-size:.83rem;color:var(--faint)}
+
+  /* reveal (post-commit) */
+  .reveal{margin-top:0;display:none}
+  .day.done .reveal{display:block}
+  .metanote{font-size:.86rem;color:var(--teal);background:rgba(82,185,166,.08);border:1px solid rgba(82,185,166,.25);border-radius:12px;padding:10px 14px;margin:14px 0}
+  details.expand{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);margin-bottom:12px}
+  details.expand>summary{cursor:pointer;list-style:none;padding:13px 16px;font-weight:800;display:flex;align-items:center;gap:10px}
+  details.expand>summary::-webkit-details-marker{display:none}
+  details.expand>summary .arr{margin-inline-start:auto;color:var(--muted);transition:.2s}
+  details.expand[open]>summary .arr{transform:rotate(180deg)}
+  .expand .inner{padding:0 16px 16px;color:var(--muted)}
+  .expand .inner p{margin:8px 0}
+  .srcbtn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.9rem;color:var(--ink);text-decoration:none;
+    background:rgba(82,185,166,.1);border:1px solid rgba(82,185,166,.3);padding:10px 15px;border-radius:12px;transition:.18s}
+  .srcbtn:hover{background:rgba(82,185,166,.2)}
+
+  /* LOCK overlay */
+  .lockbar{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,.22);border:1px dashed var(--line2);border-radius:16px;padding:16px 18px;margin-top:16px}
+  .lockbar .lic{font-size:1.5rem}
+  .lockbar b{color:var(--ink)}
+  .lockbar span{color:var(--muted);font-size:.9rem}
+
+  /* COORDINATOR */
+  .msg{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:20px;padding:18px 20px;margin-bottom:18px}
+  .msg .hd{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  .msg .num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:900;font-family:"Frank Ruhl Libre",serif;
+    background:linear-gradient(140deg,var(--amber2),var(--amber));color:#1a1410}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .msgtext{white-space:pre-wrap;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:.96rem;color:#f1e8d9}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+  .srccard{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .srccard .org{font-size:.76rem;color:var(--teal);font-weight:800;letter-spacing:.5px}
+  .srccard a{color:var(--amber2);font-weight:700;text-decoration:none}
+  .srccard a:hover{text-decoration:underline}
+
+  footer{padding:44px 0 64px;text-align:center;color:var(--muted);border-top:1px solid var(--line);margin-top:24px}
+  footer b{color:var(--ink)}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);opacity:0;z-index:90;
+    background:#13352d;border:1px solid rgba(82,185,166,.5);color:#bff0e2;padding:12px 20px;border-radius:14px;font-weight:700;transition:.3s;box-shadow:var(--shadow)}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+  .modal{position:fixed;inset:0;background:rgba(8,6,4,.82);backdrop-filter:blur(6px);z-index:100;display:none;place-items:center;padding:20px}
+  .modal.show{display:grid}
+  .cert{background:linear-gradient(160deg,#2a221b,#1b1714);border:1px solid rgba(232,163,61,.45);border-radius:24px;max-width:540px;width:100%;padding:34px;text-align:center;box-shadow:var(--shadow);position:relative}
+  .cert .seal{font-size:3rem}
+  .cert h3{font-family:"Frank Ruhl Libre",serif;font-size:1.8rem;margin:.1em 0;font-weight:900}
+  .cert p{color:var(--muted)}
+  .cert input{width:100%;text-align:center;background:rgba(0,0,0,.3);border:1px solid var(--line2);border-radius:12px;color:var(--ink);font-family:inherit;font-size:1.05rem;padding:12px;margin:14px 0}
+  .closex{position:absolute;left:16px;top:14px;cursor:pointer;color:var(--muted);font-size:1.5rem;background:none;border:0}
+  canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:95}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="navin">
+    <div class="brand"><span class="mark">ח</span><span>חמישה ימים · AI בכיתה</span></div>
+    <nav class="links">
+      <a href="#hero">בית</a>
+      <a href="#how">איך זה עובד</a>
+      <a href="#principles">העקרונות</a>
+      <a href="#coordinator">לרכז/ת</a>
+      <a href="#sources">מקורות</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="wrap heroin">
+    <div>
+      <span class="eyebrow"><span class="pulse"></span> ספירה לאחור · סוף שנת הלימודים</span>
+      <h1 class="serif">חמישה ימים.<br/>חמישה עקרונות.<br/><em>ולמידה שנשארת.</em></h1>
+      <p class="lead">מסע סוף-שנה לצוות המורים על למידה דיגיטלית עם בינה מלאכותית. כל יום נפתח <strong>רק</strong> אחרי שעבדתם באמת — כי ידע נחרט דרך מאמץ, לא דרך גלילה.</p>
+      <div class="ctarow">
+        <a class="btn primary" href="#principles">מתחילים את היום הראשון →</a>
+        <a class="btn ghost" href="#coordinator">📋 הודעות לקבוצה</a>
+      </div>
+    </div>
+    <div class="herocard">
+      <h3>הזמן שנותר</h3>
+      <div class="clock">
+        <div class="unit"><b id="cd">0</b><span>ימים</span></div>
+        <div class="unit"><b id="ch">0</b><span>שעות</span></div>
+        <div class="unit"><b id="cm">0</b><span>דק׳</span></div>
+        <div class="unit"><b id="cs">0</b><span>שנ׳</span></div>
+      </div>
+      <h3>ההתקדמות שלך</h3>
+      <div class="ring-wrap" style="margin-top:10px">
+        <div class="ring">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle cx="42" cy="42" r="36" fill="none" stroke="rgba(245,236,223,.12)" stroke-width="8"/>
+            <circle id="ringfg" cx="42" cy="42" r="36" fill="none" stroke="url(#g1)" stroke-width="8" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="226.2"/>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3bd66"/><stop offset="1" stop-color="#52b9a6"/></linearGradient></defs>
+          </svg>
+          <div class="pct"><span id="pctnum">0</span><small>מתוך 5</small></div>
+        </div>
+        <div>
+          <div class="rpline">השלמת <b id="doneword">0 ימים</b> במסע.</div>
+          <button class="btn ghost" id="resetbtn" style="padding:8px 14px;font-size:.84rem;margin-top:8px">איפוס התקדמות</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">מעוצב עם חיכוך מועיל</div>
+      <h2 class="serif">למה האתר הזה לא "חלק מדי"?</h2>
+      <p>ממשקים קלים מדי מובילים ל"אשליית מסוגלות": מזהים את החומר בצפייה, אבל לא שולפים אותו ברגע האמת. לכן בנינו כאן <strong>חיכוך מתוכנן</strong> — מכשולים מכוונים שמכריחים אתכם לחשוב אקטיבית. זה מבוסס על עקרון ה־<em>desirable difficulties</em> של פרופ' רוברט ביורק.</p>
+    </div>
+    <div class="how">
+      <div class="howcard"><div class="ic">✍️</div><b>קלט אקטיבי</b><span>מקלידים תשובה בעצמכם — בלי שאלות אמריקאיות קלות.</span></div>
+      <div class="howcard"><div class="ic">🤔</div><b>אינטראקציה מאשרת</b><span>קודם מנמקים את החשיבה, ורק אז נחשפת ההרחבה.</span></div>
+      <div class="howcard"><div class="ic">⏳</div><b>משוב מושהה</b><span>מעריכים את עצמכם לפני המשוב — מטא-קוגניציה.</span></div>
+      <div class="howcard"><div class="ic">🔓</div><b>ניווט מדורג</b><span>יום מתקדם נפתח רק אחרי שליטה אמיתית בקודם.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">חמשת העקרונות</div>
+      <h2 class="serif">המסע, יום אחר יום</h2>
+      <p>מעוגן במסגרת הכשירות של אונסק"ו למורים (5 ממדים), בהנחיות האיחוד האירופי ובהנחיות משרד החינוך. עברו דרך כל יום לפי הסדר — ככה זה אמור להרגיש.</p>
+    </div>
+    <div id="days"></div>
+  </div>
+</section>
+
+<!-- COORDINATOR -->
+<section id="coordinator">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">לרכז/ת הקבוצה</div>
+      <h2 class="serif">חמש הודעות מוכנות לשליחה</h2>
+      <p>אחת לכל יום: מלל קצר + תמונת טריגר להורדה כ-PNG. מעתיקים, מורידים תמונה, שולחים בקבוצה.</p>
+    </div>
+    <div id="messages"></div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">בלי המצאות</div>
+      <h2 class="serif">מקורות מוסמכים</h2>
+      <p>כל עיקרון מפנה למקור הרשמי המלא — גופים מוסמכים בלבד.</p>
+    </div>
+    <div class="grid2" style="grid-template-columns:1fr 1fr">
+      <div class="srccard"><div class="org">UNESCO · אונסק"ו</div><p><a href="https://www.unesco.org/en/articles/ai-competency-framework-teachers" target="_blank" rel="noopener">AI Competency Framework for Teachers</a><br/><span style="color:var(--muted);font-size:.9rem">מסגרת 5 הממדים שעליה בנוי המסע.</span></p></div>
+      <div class="srccard"><div class="org">UNESCO · אונסק"ו</div><p><a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noopener">Guidance for generative AI in education</a><br/><span style="color:var(--muted);font-size:.9rem">הנחיות לשימוש בבינה יוצרת בחינוך.</span></p></div>
+      <div class="srccard"><div class="org">European Commission</div><p><a href="https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence" target="_blank" rel="noopener">Ethical guidelines on AI for educators</a><br/><span style="color:var(--muted);font-size:.9rem">פרטיות, הוגנות, שקיפות, אחריותיות.</span></p></div>
+      <div class="srccard"><div class="org">משרד החינוך · ישראל</div><p><a href="https://pop.education.gov.il/sherutey-tiksuv-bachinuch/creative-artificial-intelligence/" target="_blank" rel="noopener">בינה מלאכותית יוצרת — מרחב פדגוגי</a><br/><span style="color:var(--muted);font-size:.9rem">הנחיות והדרכות ל-AI במערכת החינוך.</span></p></div>
+      <div class="srccard"><div class="org">עקרון העיצוב · Desirable Difficulties</div><p><a href="https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf" target="_blank" rel="noopener">Bjork &amp; Bjork — Introducing Desirable Difficulties</a><br/><span style="color:var(--muted);font-size:.9rem">הבסיס המחקרי ל"חיכוך מועיל" שבו עוצב האתר.</span></p></div>
+      <div class="srccard"><div class="org">רקע</div><p><a href="https://en.wikipedia.org/wiki/Desirable_difficulty" target="_blank" rel="noopener">Desirable difficulty — סקירה</a><br/><span style="color:var(--muted);font-size:.9rem">הסבר נגיש על מאבק יצרני וקידוד לזיכרון.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p><b>סיימתם את חמשת הימים?</b> סיימתם את השנה עם כלים שיישארו — וחווייתם בעצמכם איך חיכוך מועיל הופך צפייה ללמידה. 🎓</p>
+  <p style="font-size:.85rem">מבוסס על מקורות מוסמכים בלבד · UNESCO · האיחוד האירופי · משרד החינוך · Bjork &amp; Bjork</p>
+</div></footer>
+
+<div class="toast" id="toast">נשמר ✅</div>
+
+<div class="modal" id="modal"><div class="cert">
+  <button class="closex" id="closex">×</button>
+  <div class="seal">🏅</div>
+  <h3 class="serif">כל הכבוד! השלמת את המסע</h3>
+  <p>5 ימים · 5 עקרונות · ולמידה שנחרטה דרך מאמץ אמיתי.</p>
+  <input id="certname" placeholder="הקלד/י את שמך לתעודה" />
+  <button class="btn primary" id="dlcert" style="width:100%;justify-content:center">⬇️ הורדת תעודת סיום</button>
+</div></div>
+<canvas id="cf"></canvas>
+
+<script>
+/* ===== DATA — grounded in UNESCO 5-dimension framework ===== */
+const DAYS=[
+ {n:5,daysLeft:5,icon:"🧭",c1:"#e8a33d",c2:"#c47e1e",chip:"יום 1 · נותרו 5 ימים",
+  title:"המורה במרכז — לא המכונה",
+  dim:"ממד אונסק\"ו: חשיבה ממוקדת-אדם (Human-centred mindset)",
+  trigger:"ניסוי קטן: תנו ל-AI לעשות משימה שאתם בדרך כלל עושים לבד — ואז שאלו, מה דווקא *אני* עשיתי כאן טוב יותר מכל מכונה?",
+  principle:"בינה מלאכותית מעצימה את שיקול הדעת המקצועי שלכם — לא מחליפה אותו. ההחלטה הפדגוגית, ההיכרות עם הילד והאחריות נשארות אצל המורה.",
+  challenge:["בחרו משימה שגרתית: מכתב להורים, פתיחת שיעור, או שאלות לדיון.","בקשו מ-AI לעשות אותה במקומכם.","אתרו היכן שיקול הדעת שלכם היה הכרחי."],
+  prompt:"כתבו 3 החלטות שבהן השיפוט המקצועי שלכם היה הכרחי — מה שיניתם, הוספתם או פסלתם בתוצר של ה-AI:",
+  expandTitle:"מהי \"חשיבה ממוקדת-אדם\"?",
+  expand:["מסגרת אונסק\"ו נפתחת בדיוק בממד הזה: AI צריך לשרת את היכולת האנושית ולקדם כבוד, צדק והכלה.","בפועל: ה-AI מציע, המורה מחליט. הוא מנסח טיוטה, אתם מתאימים לכיתה, לתרבות ולצרכים של כל תלמיד.","כשהאחריות נשארת אצל האדם — הטכנולוגיה לוקחת את העומס, ואתם מתפנים לקשר ולחינוך."],
+  src:{label:"מסגרת אונסק\"ו למורים",url:"https://www.unesco.org/en/articles/ai-competency-framework-teachers"}},
+
+ {n:4,daysLeft:4,icon:"🔒",c1:"#52b9a6",c2:"#2f8f7f",chip:"יום 2 · נותרו 4 ימים",
+  title:"אתיקה, פרטיות והוגנות",
+  dim:"ממד אונסק\"ו: אתיקה של AI (Ethics of AI)",
+  trigger:"שאלה ששווה זהב: מה בעצם קורה למידע על התלמידים שלכם כשאתם מקלידים אותו לכלי AI?",
+  principle:"הנתונים שאנחנו מזינים יוצאים מרשותנו. כלל הזהב: לא מזינים פרטים מזהים של תלמידים. שומרים על פרטיות, מודעים להטיות, ושקופים מול התלמידים.",
+  challenge:["חשבו על פרומפט שהייתם כותבים על תלמיד (המלצה / ניתוח קושי).","שכתבו אותו בלי שום פרט מזהה — שם, ת\"ז, כיתה או פרט רגיש.","בדקו: התשובה עדיין טובה? לרוב כן."],
+  prompt:"כתבו כאן את הגרסה האנונימית של הפרומפט שלכם (בלי פרטים מזהים), וציינו מה הורדתם ממנו:",
+  expandTitle:"למה זה קריטי?",
+  expand:["ההנחיות האתיות של האיחוד האירופי נשענות על חמישה עוגנים: סוכנות אנושית, שקיפות, הוגנות, פרטיות ואחריותיות.","רוב כלי ה-AI הציבוריים אינם מאושרים לעיבוד מידע אישי של קטינים — לכן מתארים מצב אנונימי.","מודלים יכולים לשכפל הטיות. תפקידנו לבחון את הפלט בעין ביקורתית לפני שימוש עם תלמידים.","שקיפות: כשמשתמשים ב-AI בכיתה — אומרים את זה. זה מודל לאוריינות אחראית."],
+  src:{label:"הנחיות אתיות · האיחוד האירופי",url:"https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence"}},
+
+ {n:3,daysLeft:3,icon:"🔍",c1:"#dd8b58",c2:"#b9622f",chip:"יום 3 · נותרו 3 ימים",
+  title:"להבין איך זה עובד — ולצוד הזיות",
+  dim:"ממד אונסק\"ו: יסודות ויישומי AI (AI foundations)",
+  trigger:"בינה מלאכותית ממציאה עובדות בביטחון מלא — \"הזיה\". היום אתם הופכים לצַיָּדֵי הזיות. כמה תתפסו?",
+  principle:"AI יוצר לא \"יודע\" — הוא מנבא את המילה הבאה. לכן הוא לפעמים בודה מקורות ועובדות בנימה משכנעת. מי שמבין זאת מאמת תמיד, ומלמד את התלמידים לעשות כך.",
+  challenge:["בחרו נושא שאתם מומחים בו.","בקשו מ-AI '5 עובדות + 3 מקורות'.","אמתו כל פריט — במיוחד: האם מקור כלשהו פשוט לא קיים?"],
+  prompt:"כמה הזיות תפסתם? תארו את ההמצאה הכי משכנעת שזיהיתם (עובדה שגויה או מקור שלא קיים):",
+  expandTitle:"מהי \"הזיה\" ולמה היא קורית?",
+  expand:["הנחיות אונסק\"ו לבינה יוצרת מדגישות שכלים אלו מייצרים תוכן סטטיסטית-סביר, לא מאומת — ולכן עלול להיות שגוי, מוטה או בדוי.","המצאת מקורות (ציטוטים שלא קיימים) מתועדת ומסוכנת בחינוך, כי היא נראית אמינה.","המסקנה: ה-AI הוא נקודת פתיחה מצוינת ונקודת סיום גרועה. תמיד מצליבים מול מקור מוסמך.","זו הזדמנות פדגוגית: לתת לתלמידים 'לתפוס' הזיות זה שיעור חשיבה ביקורתית מהמעלה הראשונה."],
+  src:{label:"הנחיות אונסק\"ו לבינה יוצרת",url:"https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research"}},
+
+ {n:2,daysLeft:2,icon:"🎓",c1:"#cdab3f",c2:"#a3851f",chip:"יום 4 · נותרו יומיים",
+  title:"פדגוגיה חכמה — הוראה מותאמת לכולם",
+  dim:"ממד אונסק\"ו: פדגוגיה של AI (AI pedagogy)",
+  trigger:"מה אם משימה אחת תהפוך לשלוש — לכל רמה? היום ה-AI עוזר לכם לעשות הבדלה בדקות, לא בשעות.",
+  principle:"הכוח האמיתי של AI בכיתה הוא התאמה אישית: אותו תוכן בכמה רמות, משוב מהיר, ורעיונות מגוונים — כדי שכל תלמיד יקבל את מה שמתאים לו.",
+  challenge:["קחו פעילות אחת שאתם מלמדים השבוע.","בקשו מ-AI ליצור אותה ב-3 רמות: בסיס, רגיל, אתגר.","בחרו גרסה, התאימו אישית, ושמרו לשנה הבאה."],
+  prompt:"איזו פעילות הפכתם למובחנת, ומה הייתם חייבים להתאים ידנית כדי שתתאים לכיתה שלכם?",
+  expandTitle:"שילוב פדגוגי נכון",
+  expand:["ממד הפדגוגיה עוסק בשילוב AI לאורך כל מעגל ההוראה — מתכנון, דרך הוראה מותאמת ועד הערכה.","הבדלה (Differentiation) היא שימוש בעל ערך גבוה: AI מקצר דרמטית את הזמן ליצירת חומרים בכמה רמות.","ה-AI מייצר טיוטה, המורה מבצע התאמה פדגוגית — זה הסוד.","כך הטכנולוגיה משרתת מטרה אמיתית: הכלה ושוויון הזדמנויות."],
+  src:{label:"מסגרת אונסק\"ו · ממד הפדגוגיה",url:"https://www.unesco.org/en/articles/ai-competency-framework-teachers"}},
+
+ {n:1,daysLeft:1,icon:"🚀",c1:"#cf8aa6",c2:"#a85f7e",chip:"יום 5 · יום אחרון!",
+  title:"מורה שלומד כל הזמן",
+  dim:"ממד אונסק\"ו: AI להתפתחות מקצועית (AI for professional learning)",
+  trigger:"היום האחרון. השאלה היחידה שחשובה לשנה הבאה: איזה הרגל אחד קטן עם AI אתם לוקחים איתכם?",
+  principle:"הקפיצה נעשית בהרגלים, לא ביום אחד. מורה שמשלב AI בלמידה המקצועית שלו — שואל, מתנסה, משתף — ממשיך לצמוח. עיקרון הסיום: התמדה קטנה ועקבית.",
+  challenge:["נסחו 'שגרת AI אישית' אחת לשנה הבאה — קטנה ובת-קיימא.","לדוגמה: 'כל יום ראשון אכין עם AI פתיחה לשיעור'.","שתפו אותה עם עמית/ה — שיתוף הופך כוונה למחויבות."],
+  prompt:"נסחו את שגרת ה-AI האישית שלכם לשנה הבאה, ומי העמית/ה שתשתפו בה:",
+  expandTitle:"ללמוד עם AI, לא רק עליו",
+  expand:["הממד החמישי מתמקד בשימוש ב-AI עבור הצמיחה המקצועית של המורה עצמו — לא רק בהוראה.","התפתחות מקצועית בעידן ה-AI היא רצף: לרכוש, להעמיק, ליצור — מתחילים קטן וצומחים.","שיתוף עם עמיתים מכפיל את האפקט: קהילה שלומדת יחד מטמיעה מהר ובטוח יותר.","משרד החינוך מציע קורסים והדרכות — נקודת המשך מצוינת אחרי המסע."],
+  src:{label:"בינה מלאכותית · משרד החינוך",url:"https://pop.education.gov.il/sherutey-tiksuv-bachinuch/creative-artificial-intelligence/"}}
+];
+const MINCHARS=30;
+
+/* ===== TRIGGER SVG ===== */
+function triggerSVG(d){
+ const sub=d.title;
+ return `<svg viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg" font-family="Frank Ruhl Libre, Heebo, Arial, sans-serif">
+  <defs>
+   <linearGradient id="bg${d.n}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b1714"/><stop offset="1" stop-color="#2a221b"/></linearGradient>
+   <linearGradient id="ac${d.n}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${d.c1}"/><stop offset="1" stop-color="${d.c2}"/></linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg${d.n})"/>
+  <circle cx="900" cy="170" r="300" fill="${d.c1}" opacity="0.14"/>
+  <circle cx="150" cy="950" r="260" fill="${d.c2}" opacity="0.12"/>
+  <text x="540" y="140" text-anchor="middle" fill="${d.c1}" font-family="Heebo,Arial" font-size="32" font-weight="700" letter-spacing="3">אתגר סוף שנה · AI בכיתה</text>
+  <text x="540" y="380" text-anchor="middle" fill="#f5ecdf" font-size="170" font-weight="900">${d.daysLeft}</text>
+  <text x="540" y="455" text-anchor="middle" fill="#b6a88f" font-family="Heebo,Arial" font-size="44" font-weight="700">${d.daysLeft===1?'יום אחרון!':'ימים שנותרו'}</text>
+  <text x="540" y="565" text-anchor="middle" font-size="120">${d.icon}</text>
+  <rect x="160" y="630" width="760" height="4" rx="2" fill="url(#ac${d.n})"/>
+  ${wrapText(sub,540,720,58,820,'#f5ecdf',900)}
+  <rect x="330" y="935" width="420" height="86" rx="43" fill="url(#ac${d.n})"/>
+  <text x="540" y="990" text-anchor="middle" fill="#1a1410" font-family="Heebo,Arial" font-size="40" font-weight="900">היום באתר 👆</text>
+ </svg>`;
+}
+function wrapText(t,x,y,size,maxw,fill,weight){
+ const words=t.split(' ');const lines=[];let line='';const approx=size*0.56;
+ for(const w of words){const test=(line?line+' ':'')+w;if(test.length*approx>maxw&&line){lines.push(line);line=w;}else line=test;}
+ if(line)lines.push(line);
+ return lines.map((l,i)=>`<text x="${x}" y="${y+i*(size+14)}" text-anchor="middle" fill="${fill}" font-size="${size}" font-weight="${weight}">${esc(l)}</text>`).join('');
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ===== STATE ===== */
+const LS='ai5_friction_v1';
+let state=JSON.parse(localStorage.getItem(LS)||'{}');
+function save(){localStorage.setItem(LS,JSON.stringify(state));}
+function isDone(n){return !!state['done_'+n];}
+function unlocked(i){return i===0 || isDone(DAYS[i-1].n);}
+
+/* ===== RENDER ===== */
+const daysEl=document.getElementById('days');
+function renderDays(){
+ daysEl.innerHTML='';
+ DAYS.forEach((d,i)=>{
+  const done=isDone(d.n);const open=unlocked(i);
+  const refl=state['refl_'+d.n]||'';const conf=state['conf_'+d.n]||0;
+  const el=document.createElement('article');
+  el.className='day'+(done?' done':'')+(open?'':' locked');el.id='day'+d.n;
+  if(!open){
+   const prev=DAYS[i-1];
+   el.innerHTML=`<div class="daygrid">
+     <div class="dayvisual" style="opacity:.5">${triggerSVG(d)}</div>
+     <div class="daybody">
+       <span class="dchip">${d.icon} ${d.chip}</span>
+       <h3 class="serif">🔒 נעול</h3>
+       <div class="lockbar"><div class="lic">🔒</div><div><b>ניווט מדורג (חיכוך מועיל)</b><br/><span>היום הזה ייפתח אחרי שתשלימו את "יום ${6-prev.n}: ${prev.title}". כך מבטיחים שליטה אמיתית לפני שממשיכים — לא רק מעבר מהיר.</span></div></div>
+     </div></div>`;
+   daysEl.appendChild(el);return;
+  }
+  el.innerHTML=`<div class="daygrid">
+    <div class="dayvisual">${triggerSVG(d)}</div>
+    <div class="daybody">
+      <span class="dchip">${d.icon} ${d.chip}</span>
+      <h3 class="serif">${d.title}</h3>
+      <div class="dim">${d.dim}</div>
+      <div class="trigger">📸 ${d.trigger}</div>
+      <p class="principle">${d.principle}</p>
+
+      <div class="flow">
+        <div class="step">
+          <div class="stepttl"><span class="stepnum">1</span>🎯 האתגר של היום</div>
+          <ol class="challenge-list">${d.challenge.map(c=>`<li>${c}</li>`).join('')}</ol>
+          <div class="timepill">⏱️ כ-10 דקות</div>
+        </div>
+        <div class="step">
+          <div class="stepttl"><span class="stepnum">2</span>✍️ קלט אקטיבי</div>
+          <div style="color:var(--muted);font-size:.92rem">${d.prompt}</div>
+          <textarea data-refl="${d.n}" ${done?'readonly':''} placeholder="כתבו כאן את התשובה שלכם...">${esc(refl)}</textarea>
+          <div class="charhint ${refl.length>=MINCHARS?'ok':''}" data-hint="${d.n}">${refl.length>=MINCHARS?'✓ מספיק כדי להמשיך':('עוד '+Math.max(0,MINCHARS-refl.length)+' תווים כדי לפתוח את ההמשך')}</div>
+        </div>
+        <div class="step">
+          <div class="stepttl"><span class="stepnum">3</span>🤔 הערכה עצמית (משוב מושהה)</div>
+          <div style="color:var(--muted);font-size:.92rem">לפני שתראו את ההרחבה — עד כמה אתם בטוחים בתשובה שלכם?</div>
+          <div class="conf" data-conf="${d.n}">${[1,2,3,4,5].map(v=>`<button data-v="${v}" class="${conf===v?'sel':''}" ${done?'disabled':''}>${v}</button>`).join('')}</div>
+        </div>
+        <div class="step">
+          <div class="commitrow">
+            ${done
+              ? `<span style="color:var(--ok);font-weight:800">✓ הושלם · התשובה ננעלה</span>`
+              : `<button class="btn primary" data-commit="${d.n}" disabled>🔓 נעל את התשובה וגלה את ההרחבה</button><span class="lockedhint" data-lh="${d.n}">צריך תשובה + דירוג ביטחון</span>`}
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        ${conf?`<div class="metanote">רשמתם ביטחון <b>${conf}/5</b>. עכשיו בדקו: ההרחבה אישרה את התחושה שלכם, או הפתיעה אתכם? הפער הזה הוא הלמידה.</div>`:''}
+        <details class="expand"><summary>📖 הרחבה: ${d.expandTitle}<span class="arr">▾</span></summary><div class="inner">${d.expand.map(p=>`<p>${p}</p>`).join('')}</div></details>
+        <a class="srcbtn" href="${d.src.url}" target="_blank" rel="noopener">🔗 למקור המוסמך המלא · ${d.src.label}</a>
+      </div>
+    </div></div>`;
+  daysEl.appendChild(el);
+ });
+ wireDays();updateProgress();
+}
+
+function commitState(n){
+ const refl=(state['refl_'+n]||'');const conf=state['conf_'+n]||0;
+ return refl.trim().length>=MINCHARS && conf>0;
+}
+function refreshCommit(n){
+ const btn=daysEl.querySelector(`[data-commit="${n}"]`);
+ const lh=daysEl.querySelector(`[data-lh="${n}"]`);
+ if(btn){const ok=commitState(n);btn.disabled=!ok;if(lh)lh.style.display=ok?'none':'inline';}
+}
+function wireDays(){
+ daysEl.querySelectorAll('textarea[data-refl]').forEach(t=>{
+  t.addEventListener('input',()=>{
+   const n=t.getAttribute('data-refl');state['refl_'+n]=t.value;save();
+   const h=daysEl.querySelector(`[data-hint="${n}"]`);
+   if(h){const ok=t.value.length>=MINCHARS;h.classList.toggle('ok',ok);h.textContent=ok?'✓ מספיק כדי להמשיך':('עוד '+Math.max(0,MINCHARS-t.value.length)+' תווים כדי לפתוח את ההמשך');}
+   refreshCommit(n);
+  });
+ });
+ daysEl.querySelectorAll('.conf[data-conf]').forEach(c=>{
+  c.addEventListener('click',e=>{
+   const b=e.target.closest('button[data-v]');if(!b)return;
+   const n=c.getAttribute('data-conf');state['conf_'+n]=+b.getAttribute('data-v');save();
+   c.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');
+   refreshCommit(n);
+  });
+ });
+ daysEl.querySelectorAll('[data-commit]').forEach(b=>{
+  b.addEventListener('click',()=>{
+   const n=b.getAttribute('data-commit');if(!commitState(n))return;
+   state['done_'+n]=true;save();burst();toast('יום הושלם — היום הבא נפתח 🔓');
+   renderDays();
+   const idx=DAYS.findIndex(d=>d.n==n);
+   const next=DAYS[idx+1];
+   setTimeout(()=>{const t=document.getElementById(next?('day'+next.n):'day'+n);t&&t.scrollIntoView({behavior:'smooth',block:'center'});},120);
+  });
+ });
+ daysEl.querySelectorAll('[data-commit]').forEach(b=>refreshCommit(b.getAttribute('data-commit')));
+}
+
+/* ===== PROGRESS ===== */
+const ringfg=document.getElementById('ringfg');const C=2*Math.PI*36;
+function updateProgress(){
+ const done=DAYS.filter(d=>isDone(d.n)).length;
+ document.getElementById('pctnum').textContent=done;
+ document.getElementById('doneword').textContent=done+' '+(done===1?'יום':'ימים');
+ ringfg.style.strokeDashoffset=C*(1-done/5);
+ if(done===5)openCert();
+}
+document.getElementById('resetbtn').addEventListener('click',()=>{
+ if(confirm('לאפס את כל ההתקדמות, התשובות וההתקדמות?')){localStorage.removeItem(LS);state={};renderDays();}
+});
+
+/* ===== COUNTDOWN ===== */
+const TARGET=new Date(2026,5,20,0,0,0); // 20.6.2026 — ניתן לעדכון (חודש 5 = יוני)
+function tick(){
+ let diff=Math.max(0,TARGET-new Date());
+ const dd=Math.floor(diff/864e5);diff-=dd*864e5;const hh=Math.floor(diff/36e5);diff-=hh*36e5;
+ const mm=Math.floor(diff/6e4);diff-=mm*6e4;const ss=Math.floor(diff/1e3);
+ cd.textContent=dd;ch.textContent=String(hh).padStart(2,'0');cm.textContent=String(mm).padStart(2,'0');cs.textContent=String(ss).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+/* ===== COORDINATOR MESSAGES ===== */
+const MSG=[
+ `🚀 *מתחילים!* אתגר סוף שנה לצוות — 5 ימים, 5 עקרונות ל-AI בכיתה.\n\n🧭 *יום 1: המורה במרכז, לא המכונה.*\nתנו ל-AI לעשות משימה שאתם עושים לבד — וגלו מה דווקא *אתם* עשיתם טוב יותר.\n\n👈 האתגר באתר. שימו לב: כל יום נפתח רק אחרי שמשלימים את הקודם 😉`,
+ `🔒 *יום 2: אתיקה ופרטיות.*\nמה קורה למידע על התלמידים כשמקלידים אותו ל-AI?\n\nהאתגר: לכתוב פרומפט בלי *שום* פרט מזהה — ולגלות שזה עובד מצוין.\n\n👈 כנסו לאתר לאתגר ולהנחיות האיחוד האירופי.`,
+ `🔍 *יום 3: צַיָּדֵי הזיות!*\nה-AI ממציא עובדות ומקורות בביטחון מלא. היום אתם תופסים אותו.\n\nשאלו 5 עובדות בתחום שלכם — וספרו כמה הזיות תפסתם.\n\n👈 האתגר + ההסבר של אונסק"ו על הזיות — באתר.`,
+ `🎓 *יום 4: הוראה מותאמת לכולם.*\nמשימה אחת → שלוש רמות, בדקות.\n\nה-AI עוזר לכם לעשות הבדלה: בסיס, רגיל ואתגר — מוכן לשנה הבאה.\n\n👈 האתגר המלא מחכה באתר.`,
+ `🏁 *יום 5 — אחרון!*\nאיזה הרגל אחד קטן עם AI אתם לוקחים לשנה הבאה?\n\nנסחו 'שגרת AI אישית', שתפו עמית/ה — וקבלו 🏅 *תעודת סיום* באתר.\n\n👈 סוגרים את המסע יחד!`
+];
+const msgsEl=document.getElementById('messages');
+DAYS.forEach((d,i)=>{
+ const w=document.createElement('div');w.className='msg';
+ w.innerHTML=`<div class="hd"><span class="num">${i+1}</span><b>הודעה ליום ${i+1} · ${d.daysLeft===1?'יום אחרון':'נותרו '+d.daysLeft+' ימים'}</b></div>
+  <div class="grid2"><div>
+    <div class="msgtext">${esc(MSG[i])}</div>
+    <div class="tools"><button class="btn primary" style="padding:10px 16px;font-size:.9rem" data-copy="${i}">📋 העתקת המלל</button></div>
+  </div><div>
+    <div style="border-radius:14px;overflow:hidden;box-shadow:var(--shadow)">${triggerSVG(d)}</div>
+    <div class="tools"><button class="btn ghost" style="padding:10px 16px;font-size:.9rem" data-img="${d.n}">⬇️ הורדת תמונת טריגר (PNG)</button></div>
+  </div></div>`;
+ msgsEl.appendChild(w);
+});
+msgsEl.addEventListener('click',e=>{
+ const cp=e.target.closest('[data-copy]');
+ if(cp){navigator.clipboard.writeText(MSG[+cp.getAttribute('data-copy')]).then(()=>toast('ההודעה הועתקה 📋'));return;}
+ const im=e.target.closest('[data-img]');
+ if(im)downloadPNG(DAYS.find(d=>d.n==im.getAttribute('data-img')));
+});
+function downloadPNG(d){
+ const blob=new Blob([triggerSVG(d)],{type:'image/svg+xml;charset=utf-8'});const url=URL.createObjectURL(blob);
+ const img=new Image();
+ img.onload=()=>{const cv=document.createElement('canvas');cv.width=1080;cv.height=1080;const x=cv.getContext('2d');
+  x.fillStyle='#1b1714';x.fillRect(0,0,1080,1080);x.drawImage(img,0,0,1080,1080);URL.revokeObjectURL(url);
+  cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='טריגר-יום-'+(6-d.n)+'.png';a.click();toast('התמונה ירדה ⬇️');},'image/png');};
+ img.onerror=()=>toast('לא ניתן להמיר — צלמו מסך כגיבוי');img.src=url;
+}
+
+/* ===== TOAST ===== */
+let toT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toT);toT=setTimeout(()=>t.classList.remove('show'),2300);}
+
+/* ===== CERTIFICATE ===== */
+const modal=document.getElementById('modal');
+document.getElementById('closex').onclick=()=>modal.classList.remove('show');
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('show');});
+function openCert(){modal.classList.add('show');burst(true);}
+const cn=document.getElementById('certname');cn.value=state.certname||'';
+cn.addEventListener('input',e=>{state.certname=e.target.value;save();});
+document.getElementById('dlcert').onclick=()=>{
+ const name=(cn.value||'מורה מצטיין/ת').trim();
+ const cv=document.createElement('canvas');cv.width=1400;cv.height=1000;const x=cv.getContext('2d');
+ const g=x.createLinearGradient(0,0,1400,1000);g.addColorStop(0,'#1b1714');g.addColorStop(1,'#2a221b');x.fillStyle=g;x.fillRect(0,0,1400,1000);
+ x.strokeStyle='#e8a33d';x.lineWidth=8;x.strokeRect(40,40,1320,920);x.strokeStyle='rgba(82,185,166,.5)';x.lineWidth=2;x.strokeRect(64,64,1272,872);
+ x.textAlign='center';x.direction='rtl';
+ x.fillStyle='#f3bd66';x.font='900 70px "Frank Ruhl Libre", Heebo, serif';x.fillText('🏅 תעודת סיום',700,210);
+ x.fillStyle='#b6a88f';x.font='700 32px Heebo, sans-serif';x.fillText('מסע סוף שנה · 5 עקרונות ללמידה דיגיטלית עם בינה מלאכותית',700,288);
+ x.fillStyle='#f5ecdf';x.font='500 36px Heebo, sans-serif';x.fillText('מוענקת בזאת ל-',700,430);
+ x.fillStyle='#e8a33d';x.font='900 76px "Frank Ruhl Libre", serif';x.fillText(name,700,528);
+ x.fillStyle='#f5ecdf';x.font='400 31px Heebo, sans-serif';
+ x.fillText('על השלמת חמשת הימים וכל האתגרים — בעבודה אקטיבית,',700,636);
+ x.fillText('וסיום השנה עם כלים חדשים ל-AI אחראי בכיתה.',700,684);
+ x.fillStyle='#52b9a6';x.font='800 30px Heebo, sans-serif';x.fillText('הושלם בתאריך '+new Date().toLocaleDateString('he-IL'),700,810);
+ x.fillStyle='#8a7d68';x.font='400 25px Heebo, sans-serif';x.fillText('מבוסס על מסגרת אונסק"ו · הנחיות האיחוד האירופי · משרד החינוך',700,884);
+ cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='תעודת-סיום-'+name+'.png';a.click();toast('התעודה ירדה 🎉');},'image/png');
+};
+
+/* ===== CONFETTI ===== */
+const cf=document.getElementById('cf');const cx=cf.getContext('2d');let parts=[];
+function sz(){cf.width=innerWidth;cf.height=innerHeight;}sz();addEventListener('resize',sz);
+function burst(big){const N=big?170:55;const cols=['#e8a33d','#f3bd66','#52b9a6','#cf8aa6','#dd8b58'];
+ for(let i=0;i<N;i++)parts.push({x:innerWidth/2,y:big?innerHeight/3:innerHeight/2,vx:(Math.random()-.5)*14,vy:Math.random()*-14-3,g:.4,s:Math.random()*8+4,c:cols[i%cols.length],life:90,rot:Math.random()*6});
+ if(!raf)loop();}
+let raf=null;
+function loop(){cx.clearRect(0,0,cf.width,cf.height);
+ parts.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.life--;p.rot+=.2;cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot);cx.fillStyle=p.c;cx.globalAlpha=Math.max(0,p.life/90);cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore();});
+ parts=parts.filter(p=>p.life>0&&p.y<cf.height+40);
+ if(parts.length)raf=requestAnimationFrame(loop);else{raf=null;cx.clearRect(0,0,cf.width,cf.height);}}
+
+/* init */
+renderDays();
+</script>
+</body>
+</html>
