@@ -10,15 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --page:#eef1f2;       /* רקע מאחורי האפליקציה */
-    --app:#ffffff;        /* רקע האפליקציה */
-    --ink:#1f2a2e;        /* טקסט כהה */
-    --muted:#727f88;      /* טקסט משני */
-    --line:#e3e8eb;       /* גבולות */
-    --line2:#d6dde0;
-    --teal:#18a294;       /* טורקיז ראשי */
-    --teal-d:#0e7569;     /* כותרות */
-    --teal-soft:#e7f6f4;  /* רקע טורקיז בהיר */
+    --page:#eef1f2; --app:#ffffff; --ink:#1f2a2e; --muted:#727f88;
+    --line:#e3e8eb; --line2:#d6dde0;
+    --teal:#18a294; --teal-d:#0e7569; --teal-soft:#e7f6f4;
     --shadow:0 18px 50px rgba(20,50,55,.12);
     --app-w:460px;
   }
@@ -26,22 +20,35 @@
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--page);color:var(--ink);
     font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.65;
-    display:flex;justify-content:center;}
+    display:flex;justify-content:center}
   .app{position:relative;width:100%;max-width:var(--app-w);min-height:100vh;background:var(--app);
     box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .content{flex:1;padding:22px 18px 40px}
 
-  /* ===== top header ===== */
-  .top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);display:grid;grid-template-columns:40px 1fr 40px;align-items:center;
-    gap:10px;padding:12px 16px}
-  .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#27b3a4,#0e7569);
-    display:grid;place-items:center;color:#fff;font-weight:800;font-size:.95rem;overflow:hidden}
-  .top .ttl{text-align:center;font-weight:800;font-size:1.12rem;color:var(--teal-d);letter-spacing:-.2px}
-  .iconbtn{width:38px;height:38px;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:var(--ink);border-radius:10px}
-  .iconbtn:hover{background:#f1f4f5}
+  /* ===== entry screen (two buttons) ===== */
+  .entry{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;padding:32px 26px;gap:4px}
+  .entry .badge{display:inline-block;font-size:.8rem;letter-spacing:1.4px;font-weight:800;color:var(--teal-d);
+    background:var(--teal-soft);border:1px solid #cdeae5;padding:7px 16px;border-radius:999px;margin-bottom:22px}
+  .entry .emoji{font-size:3rem;margin-bottom:6px}
+  .entry h1{font-size:2.4rem;font-weight:900;margin:0 0 12px;letter-spacing:-.6px;line-height:1.15;color:var(--ink)}
+  .entry .sub{color:var(--muted);font-size:1.08rem;max-width:330px;margin:0 0 34px}
+  .entry-btns{display:flex;flex-direction:column;gap:14px;width:100%;max-width:330px}
+  .big-btn{appearance:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:1.15rem;
+    padding:20px 22px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:11px;transition:.16s;border:1.5px solid transparent}
+  .big-btn .bi{display:grid;place-items:center}
+  .big-btn.primary{background:var(--teal);color:#fff;box-shadow:0 14px 30px rgba(24,162,148,.3)}
+  .big-btn.primary:hover{background:var(--teal-d);transform:translateY(-2px)}
+  .big-btn.outline{background:#fff;color:var(--teal-d);border-color:var(--line2)}
+  .big-btn.outline:hover{border-color:var(--teal);background:var(--teal-soft);transform:translateY(-2px)}
 
-  /* ===== content ===== */
-  .content{flex:1;padding:18px 18px 96px}
+  /* back link */
+  .back{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted);font-weight:700;
+    font-size:.95rem;text-decoration:none;margin-bottom:6px}
+  .back:hover{color:var(--teal-d)}
+  .view-title{font-size:1.5rem;font-weight:900;color:var(--teal-d);margin:6px 0 2px;letter-spacing:-.3px}
+
+  /* ===== sections / steps ===== */
   .sec{padding:18px 0;border-bottom:1px solid var(--line)}
   .sec:last-of-type{border-bottom:0}
   .sec-h{display:flex;align-items:center;gap:9px;margin-bottom:4px}
@@ -49,7 +56,6 @@
   .sec-h h2{margin:0;font-size:1.16rem;font-weight:800;color:var(--teal-d);letter-spacing:-.3px}
   .sec .sub{color:var(--muted);margin:0 0 4px;font-size:.96rem}
 
-  /* pills (single choice) */
   .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
   .pill{position:relative;cursor:pointer;user-select:none}
   .pill input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
@@ -58,7 +64,6 @@
   .pill:hover span{border-color:var(--teal)}
   .pill:has(input:checked) span{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
 
-  /* text fields */
   .field{width:100%;background:#fff;border:1px solid var(--line2);border-radius:14px;color:var(--ink);
     font-family:inherit;font-size:1rem;padding:14px 16px;margin-top:14px}
   textarea.field{resize:vertical;min-height:92px}
@@ -68,11 +73,8 @@
   .hint ul{margin:5px 0 0;padding-inline-start:18px}
   .lbl{display:block;margin-top:14px;font-weight:700;font-size:.96rem}
 
-  /* generate (step 3) */
-  .gen-box{margin-top:14px;border:1.5px dashed var(--line2);border-radius:16px;background:#fafbfb;
-    padding:26px;display:grid;place-items:center;text-align:center}
-  .gen-circle{width:58px;height:58px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);
-    display:grid;place-items:center;margin-bottom:10px}
+  .gen-box{margin-top:14px;border:1.5px dashed var(--line2);border-radius:16px;background:#fafbfb;padding:26px;display:grid;place-items:center;text-align:center}
+  .gen-circle{width:58px;height:58px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);display:grid;place-items:center;margin-bottom:10px}
   .gen-box small{color:var(--muted)}
   .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:1rem;
     padding:13px 26px;border-radius:13px;background:var(--teal);color:#fff;display:inline-flex;align-items:center;gap:8px;
@@ -80,10 +82,8 @@
   .btn:hover{background:var(--teal-d);transform:translateY(-1px)}
   .gen-note{margin-top:12px;background:var(--teal-soft);border:1px solid #bfe7e1;border-radius:12px;padding:12px 15px;color:var(--teal-d);font-weight:600}
 
-  /* checkbox rows (step 4) */
   .crows{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .crow{display:flex;align-items:center;gap:12px;cursor:pointer;background:#fff;border:1px solid var(--line2);
-    border-radius:13px;padding:13px 15px;transition:.15s}
+  .crow{display:flex;align-items:center;gap:12px;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:13px;padding:13px 15px;transition:.15s}
   .crow:hover{border-color:var(--teal)}
   .crow input{position:absolute;opacity:0;width:0;height:0}
   .box{width:21px;height:21px;border:2px solid var(--line2);border-radius:6px;flex:none;display:grid;place-items:center;transition:.15s}
@@ -93,23 +93,18 @@
   .crow:has(input:checked) .box{background:var(--teal);border-color:var(--teal)}
   .crow:has(input:checked) .box svg{opacity:1}
 
-  /* icon cards (step 5) */
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-  .card{position:relative;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:16px;
-    padding:18px 12px;text-align:center;transition:.15s}
+  .card{position:relative;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:16px;padding:18px 12px;text-align:center;transition:.15s}
   .card input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
-  .card .cic{width:46px;height:46px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);
-    display:grid;place-items:center;margin:0 auto 9px;font-size:1.3rem;transition:.15s}
+  .card .cic{width:46px;height:46px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);display:grid;place-items:center;margin:0 auto 9px;font-size:1.3rem;transition:.15s}
   .card .cl{font-weight:700;font-size:.95rem}
   .card:hover{border-color:var(--teal)}
   .card:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
   .card:has(input:checked) .cic{background:var(--teal);color:#fff}
 
-  /* big question list */
   .qlist{margin:12px 0 0;padding:0;list-style:none}
   .qlist li{margin:7px 0;font-weight:600}
 
-  /* finish */
   .finish{margin:20px 0 4px;background:var(--teal-soft);border:1px solid #bfe7e1;border-radius:20px;padding:28px 22px;text-align:center}
   .finish .big{font-size:2rem}
   .finish h2{margin:.2em 0 .3em;font-size:1.2rem;font-weight:800;color:var(--teal-d)}
@@ -117,8 +112,6 @@
   .finish p{color:#3d4a4f;margin:0;font-size:.96rem}
   .finish .next{margin-top:16px;display:inline-block;font-weight:800;color:#fff;background:var(--teal);padding:9px 18px;border-radius:999px}
 
-  /* article */
-  .article{padding-top:8px}
   .article .tag{font-size:.74rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);font-weight:800}
   .article h2{font-size:1.5rem;margin:.25em 0 .05em;font-weight:900;color:var(--ink);letter-spacing:-.4px;line-height:1.25}
   .article .byline{color:var(--muted);font-weight:700;margin-bottom:14px}
@@ -131,34 +124,36 @@
   .links a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:var(--teal-d);
     background:var(--teal-soft);border:1px solid #cdeae5;padding:11px 14px;border-radius:12px}
   .links a:hover{background:#d7f0ec}
-
-  /* bottom nav */
-  .nav{position:sticky;bottom:0;z-index:30;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
-    border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 6px;gap:4px}
-  .nav a{display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;color:var(--muted);
-    font-size:.72rem;font-weight:600;padding:6px 2px;border-radius:12px}
-  .nav a .ni{display:grid;place-items:center;width:26px;height:26px}
-  .nav a.active{color:#fff}
-  .nav a.active .ni{background:var(--teal);color:#fff;width:46px;height:30px;border-radius:11px}
-  .nav a.active{color:var(--teal-d)}
+  [hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div class="app" id="top">
+<div class="app">
 
-  <!-- header -->
-  <header class="top">
-    <div class="avatar">ינ</div>
-    <div class="ttl">4 ימים לסוף שנה</div>
-    <button class="iconbtn" aria-label="תפריט">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </header>
+  <!-- ===== מסך כניסה: שני כפתורים ===== -->
+  <section class="entry" id="entry">
+    <span class="badge">אתגר סוף שנה · יום 4</span>
+    <div class="emoji">🎯</div>
+    <h1>המיומנות האנושית</h1>
+    <p class="sub">AI יכול לייצר תוכן. אנשי חינוך מייצרים משמעות.</p>
+    <div class="entry-btns">
+      <button class="big-btn primary" data-go="challenge">
+        <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
+        אתגר יום 4
+      </button>
+      <button class="big-btn outline" data-go="article">
+        <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></span>
+        הרחבה
+      </button>
+    </div>
+  </section>
 
-  <main class="content">
+  <!-- ===== תצוגת האתגר ===== -->
+  <div class="content" id="view-challenge" hidden>
+    <a class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
+    <div class="view-title">אתגר יום 4</div>
 
-    <!-- שלב 1 -->
-    <section class="sec" id="steps">
+    <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke-linecap="round"/><circle cx="12" cy="12" r="4"/></svg></span><h2>תנו ל-AI לעבוד</h2></div>
       <p class="sub">מה תרצו שהבינה המלאכותית תיצור עבורכם?</p>
       <div class="pills">
@@ -172,7 +167,6 @@
       </div>
     </section>
 
-    <!-- שלב 2 -->
     <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h2>תנו ל-AI משימה</h2></div>
       <p class="sub">על איזה נושא תרצו ליצור את התוצר?</p>
@@ -183,7 +177,6 @@
       <textarea class="field" placeholder="כתבו כאן את הנושא…"></textarea>
     </section>
 
-    <!-- שלב 3 -->
     <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span><h2>תוצר ה-AI</h2></div>
       <p class="sub">🤖 לחצו על "צור" — והמערכת מייצרת את התוצר.</p>
@@ -195,7 +188,6 @@
       <div class="gen-note" id="genNote" hidden>פתחו את כלי ה-AI שלכם (ChatGPT · Gemini · Copilot), צרו את התוצר לפי הבחירה והנושא — ואז המשיכו לשלב הבא 👇</div>
     </section>
 
-    <!-- שלב 4 -->
     <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h2>עכשיו מגיע החלק החשוב</h2></div>
       <p class="sub">הסתכלו על התוצר: מה חסר כאן כדי שהתלמידים שלי באמת יתחברו אליו?</p>
@@ -211,7 +203,6 @@
       </div>
     </section>
 
-    <!-- שלב 5 -->
     <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="6.5" cy="12.5" r="1.5" fill="currentColor"/><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a6 6 0 0 0 6-6c0-5-4.5-8-10-8Z"/></svg></span><h2>המיומנות האנושית</h2></div>
       <p class="sub">איזו מיומנות אנושית תוכל להוסיף הכי הרבה ערך לתוצר?</p>
@@ -227,7 +218,6 @@
       </div>
     </section>
 
-    <!-- שלב 7 -->
     <section class="sec">
       <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg></span><h2>השאלה הגדולה</h2></div>
       <p class="sub">AI יודע לעשות הרבה. אבל… כתבו דבר אחד בלבד ש:</p>
@@ -241,7 +231,6 @@
       <textarea class="field" placeholder="כתבו כאן…"></textarea>
     </section>
 
-    <!-- מסך סיום -->
     <div class="finish">
       <div class="big">🎯</div>
       <h2>אם הגעתם עד לכאן, כנראה שהבנתם את הרעיון המרכזי של היום</h2>
@@ -249,75 +238,78 @@
       <p>ככל שהבינה המלאכותית משתפרת, כך גדל הערך של היכולות האנושיות: חשיבה, שיקול דעת, יצירתיות, אמפתיה והיכרות עם הלומדים.</p>
       <span class="next">נתראה ביום 3 👋</span>
     </div>
+  </div>
 
-    <!-- מאמר הרחבה -->
-    <article class="article" id="article">
-      <div class="tag">מאמר הרחבה</div>
-      <h2>אם AI יודע הכל, מה נשאר לנו ללמד?</h2>
-      <div class="byline">ינון זנו</div>
+  <!-- ===== תצוגת ההרחבה ===== -->
+  <div class="content article" id="view-article" hidden>
+    <a class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
+    <div class="tag">מאמר הרחבה</div>
+    <h2>אם AI יודע הכל, מה נשאר לנו ללמד?</h2>
+    <div class="byline">ינון זנו</div>
 
-      <p>הבינה המלאכותית נכנסה לחיים שלנו בסערה. מה שהתחיל ככלי ניסיוני הפך מהר מאוד לעוזר אישי, מורה פרטי, מתכנת ושותף מלא לחשיבה. אנחנו יכולים היום להפיק בשניות סיכומי שיעור, פתרונות לתרגילים מורכבים, מצגות שלמות ואפילו לקבל תשובות מותאמות אישית לבגרות.</p>
-      <p>לנוכח המציאות הזו הרבה אנשי חינוך שואלים את עצמם: אם ה-AI יודע לעשות כל כך הרבה, מה התפקיד שלנו כמורים? השאלה הזו לא מגיעה רק מסקרנות טכנולוגית. היא נוגעת בבסיס העשייה שלנו: מה באמת חשוב ללמד בעולם שבו כל המידע זמין בלחיצת כפתור?</p>
+    <p>הבינה המלאכותית נכנסה לחיים שלנו בסערה. מה שהתחיל ככלי ניסיוני הפך מהר מאוד לעוזר אישי, מורה פרטי, מתכנת ושותף מלא לחשיבה. אנחנו יכולים היום להפיק בשניות סיכומי שיעור, פתרונות לתרגילים מורכבים, מצגות שלמות ואפילו לקבל תשובות מותאמות אישית לבגרות.</p>
+    <p>לנוכח המציאות הזו הרבה אנשי חינוך שואלים את עצמם: אם ה-AI יודע לעשות כל כך הרבה, מה התפקיד שלנו כמורים? השאלה הזו לא מגיעה רק מסקרנות טכנולוגית. היא נוגעת בבסיס העשייה שלנו: מה באמת חשוב ללמד בעולם שבו כל המידע זמין בלחיצת כפתור?</p>
 
-      <h3>התחרות היא לא על ידע</h3>
-      <p>הטעות הכי גדולה בדיון הזה היא ההנחה שאנחנו בתחרות מול המכונה על ידע. אבל בית הספר מעולם לא נועד להיות אנציקלופדיה. גם לפני ה-ChatGPT היו כאן ספרים, מנועי חיפוש ומאגרי מידע. הייחוד של החינוך אף פעם לא היה הנגשת המידע עצמו אלא היכולת לקחת את המידע הזה, להפוך אותו להבנה חותכת ולהפוך את ההבנה למשמעות ולפעולה.</p>
-      <p>AI יכול לזרוק עלינו מידע אינסופי. הוא פשוט לא יכול להחליט בשבילנו מה מוסרי, מה נכון בהקשר מסוים או מה באמת משמעותי לתלמיד.</p>
+    <h3>התחרות היא לא על ידע</h3>
+    <p>הטעות הכי גדולה בדיון הזה היא ההנחה שאנחנו בתחרות מול המכונה על ידע. אבל בית הספר מעולם לא נועד להיות אנציקלופדיה. גם לפני ה-ChatGPT היו כאן ספרים, מנועי חיפוש ומאגרי מידע. הייחוד של החינוך אף פעם לא היה הנגשת המידע עצמו אלא היכולת לקחת את המידע הזה, להפוך אותו להבנה חותכת ולהפוך את ההבנה למשמעות ולפעולה.</p>
+    <p>AI יכול לזרוק עלינו מידע אינסופי. הוא פשוט לא יכול להחליט בשבילנו מה מוסרי, מה נכון בהקשר מסוים או מה באמת משמעותי לתלמיד.</p>
 
-      <h3>הידע לא נעלם – התפקיד שלו השתנה</h3>
-      <p>פעם הערכנו תלמידים לפי הכמות שהם זוכרים. מי שידע לשלוף עובדות, תאריכים ונוסחאות נחשב לחזק יותר. היום היכולת החשובה היא כבר לא רק "לדעת". היכולת החשובה היא להבין, לבקר, ליישם ולשאול שאלות חכמות. למעשה, OECD מדגיש כי בעולם שבו המידע זמין לכולם, הערך עובר מהידיעה עצמה ליכולת להשתמש בידע באופן מושכל, ביקורתי ואחראי.</p>
-      <p>דווקא בגלל שהמידע כל כך נגיש אנחנו חייבים ללמד את התלמידים איך להבחין בין מידע איכותי לפייק ניוז, בין עובדה לדעה ובין תשובה שנשמעת נכונה לתשובה אמיתית שיש לה משמעות.</p>
+    <h3>הידע לא נעלם – התפקיד שלו השתנה</h3>
+    <p>פעם הערכנו תלמידים לפי הכמות שהם זוכרים. מי שידע לשלוף עובדות, תאריכים ונוסחאות נחשב לחזק יותר. היום היכולת החשובה היא כבר לא רק "לדעת". היכולת החשובה היא להבין, לבקר, ליישם ולשאול שאלות חכמות. למעשה, OECD מדגיש כי בעולם שבו המידע זמין לכולם, הערך עובר מהידיעה עצמה ליכולת להשתמש בידע באופן מושכל, ביקורתי ואחראי.</p>
+    <p>דווקא בגלל שהמידע כל כך נגיש אנחנו חייבים ללמד את התלמידים איך להבחין בין מידע איכותי לפייק ניוז, בין עובדה לדעה ובין תשובה שנשמעת נכונה לתשובה אמיתית שיש לה משמעות.</p>
 
-      <h3>האשליה של העבודה המושלמת</h3>
-      <p>קחו לדוגמה עבודה להגשה. תלמיד אחד כותב אותה בעצמו במשך שלוש שעות. תלמיד שני מבקש מה-AI לכתוב אותה בשתי דקות. סביר להניח שהעבודה של התלמיד השני תהיה מנוסחת טוב יותר ואפילו מקיפה יותר. אבל האם הוא באמת למד משהו? לא בטוח.</p>
-      <p>הפער הוא לא בתוצר הסופי אלא בתהליך החשיבה. מי בחר את המקורות? מי אימת את המידע? מי זיהה הנחות סמויות, חיבר בין הרעיונות ושאל את השאלות החדשות? הלמידה האמיתית קורית בראש, לא בהקלדה.</p>
+    <h3>האשליה של העבודה המושלמת</h3>
+    <p>קחו לדוגמה עבודה להגשה. תלמיד אחד כותב אותה בעצמו במשך שלוש שעות. תלמיד שני מבקש מה-AI לכתוב אותה בשתי דקות. סביר להניח שהעבודה של התלמיד השני תהיה מנוסחת טוב יותר ואפילו מקיפה יותר. אבל האם הוא באמת למד משהו? לא בטוח.</p>
+    <p>הפער הוא לא בתוצר הסופי אלא בתהליך החשיבה. מי בחר את המקורות? מי אימת את המידע? מי זיהה הנחות סמויות, חיבר בין הרעיונות ושאל את השאלות החדשות? הלמידה האמיתית קורית בראש, לא בהקלדה.</p>
 
-      <h3>המיומנויות שעושות את ההבדל</h3>
-      <p>מגמה זו אינה רק תחושה של אנשי חינוך. על פי World Economic Forum, המיומנויות המבוקשות ביותר בשנים הקרובות יהיו חשיבה אנליטית, יצירתיות, למידה מתמשכת, גמישות ויכולת לעבוד עם אנשים. ככל שהטכנולוגיה מתקדמת המיומנויות האנושיות שלנו הופכות לקריטיות יותר:</p>
-      <ul>
-        <li><b>חשיבה ביקורתית:</b> היכולת להטיל ספק, לזהות הטיות ולהעריך מקורות בעיניים פקוחות.</li>
-        <li><b>יצירתיות:</b> AI יודע למקסס מידע קיים. אנחנו יודעים לדמיין אפשרויות חדשות ולחבר עולמות תוכן רחוקים.</li>
-        <li><b>שיתוף פעולה:</b> למידה היא לא רק תהליך טכני אלא דיאלוג אנושי בגובה העיניים.</li>
-        <li><b>שיקול דעת:</b> היכולת לקבל החלטות במצבי אי-ודאות ולהפעיל שיפוט מוסרי וערכי.</li>
-      </ul>
+    <h3>המיומנויות שעושות את ההבדל</h3>
+    <p>מגמה זו אינה רק תחושה של אנשי חינוך. על פי World Economic Forum, המיומנויות המבוקשות ביותר בשנים הקרובות יהיו חשיבה אנליטית, יצירתיות, למידה מתמשכת, גמישות ויכולת לעבוד עם אנשים. ככל שהטכנולוגיה מתקדמת המיומנויות האנושיות שלנו הופכות לקריטיות יותר:</p>
+    <ul>
+      <li><b>חשיבה ביקורתית:</b> היכולת להטיל ספק, לזהות הטיות ולהעריך מקורות בעיניים פקוחות.</li>
+      <li><b>יצירתיות:</b> AI יודע למקסס מידע קיים. אנחנו יודעים לדמיין אפשרויות חדשות ולחבר עולמות תוכן רחוקים.</li>
+      <li><b>שיתוף פעולה:</b> למידה היא לא רק תהליך טכני אלא דיאלוג אנושי בגובה העיניים.</li>
+      <li><b>שיקול דעת:</b> היכולת לקבל החלטות במצבי אי-ודאות ולהפעיל שיפוט מוסרי וערכי.</li>
+    </ul>
 
-      <h3>אז למה המורה עדיין רלוונטי? אולי יותר מתמיד</h3>
-      <p>AI יכול להסביר חומר מצוין. המורה יודע לאיזה תלמיד צריך להסביר אותו אחרת. AI יכול לייצר תרגיל מדויק. המורה יודע מי מהתלמידים ייכנס לחרדה מולו. AI יכול לנסח הודעה תקנית להורים. המורה יודע אילו מילים יבנו שם אמון אמיתי.</p>
-      <p>הערך שלנו כאנשי חינוך לא מגיע רק ממה שאנחנו יודעים. הוא נובע מהיכולת שלנו לראות את הילד שמולנו, להבין את הצרכים שלו, לאתגר אותו, להאמין בו ולעזור לו לצמוח. אלו יכולות אנושיות נטו.</p>
+    <h3>אז למה המורה עדיין רלוונטי? אולי יותר מתמיד</h3>
+    <p>AI יכול להסביר חומר מצוין. המורה יודע לאיזה תלמיד צריך להסביר אותו אחרת. AI יכול לייצר תרגיל מדויק. המורה יודע מי מהתלמידים ייכנס לחרדה מולו. AI יכול לנסח הודעה תקנית להורים. המורה יודע אילו מילים יבנו שם אמון אמיתי.</p>
+    <p>הערך שלנו כאנשי חינוך לא מגיע רק ממה שאנחנו יודעים. הוא נובע מהיכולת שלנו לראות את הילד שמולנו, להבין את הצרכים שלו, לאתגר אותו, להאמין בו ולעזור לו לצמוח. אלו יכולות אנושיות נטו.</p>
 
-      <h3>האתגר האמיתי של מערכת החינוך</h3>
-      <p>האתגר שלנו הוא לא לנצח את הבינה המלאכותית אלא לעבוד איתה חכם. במקום לשאול "איך AI יכול להחליף אותנו?", אנחנו צריכים לשאול: "איך AI יכול לפנות לנו זמן כדי לעשות את מה שרק אנחנו יכולים לעשות?". ברגע שהטכנולוגיה לוקחת עליה את המשימות הטכניות והשחורות נפתח לנו חלון אדיר להשקיע יותר בשיחות אישיות, בחשיבה משותפת ובפיתוח מיומנויות לחיים.</p>
-      <p>הבינה המלאכותית לא מסמנת את סוף החינוך אלא פותחת לנו פרק חדש ומרתק. השאלה היום היא כבר לא "מה התלמיד יודע?" אלא "מה התלמיד יודע לעשות עם מה שהוא יודע?". וכאן, דווקא כאן, המקום שלנו כאנשי חינוך הופך למשמעותי מתמיד.</p>
+    <h3>האתגר האמיתי של מערכת החינוך</h3>
+    <p>האתגר שלנו הוא לא לנצח את הבינה המלאכותית אלא לעבוד איתה חכם. במקום לשאול "איך AI יכול להחליף אותנו?", אנחנו צריכים לשאול: "איך AI יכול לפנות לנו זמן כדי לעשות את מה שרק אנחנו יכולים לעשות?". ברגע שהטכנולוגיה לוקחת עליה את המשימות הטכניות והשחורות נפתח לנו חלון אדיר להשקיע יותר בשיחות אישיות, בחשיבה משותפת ובפיתוח מיומנויות לחיים.</p>
+    <p>הבינה המלאכותית לא מסמנת את סוף החינוך אלא פותחת לנו פרק חדש ומרתק. השאלה היום היא כבר לא "מה התלמיד יודע?" אלא "מה התלמיד יודע לעשות עם מה שהוא יודע?". וכאן, דווקא כאן, המקום שלנו כאנשי חינוך הופך למשמעותי מתמיד.</p>
 
-      <div class="links">
-        <a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noopener">🔗 UNESCO – Generative AI in Education</a>
-        <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">🔗 Future of Jobs Report 2025</a>
-        <a href="https://www.oecd.org/education/2030-project/" target="_blank" rel="noopener">🔗 OECD Future of Education and Skills 2030</a>
-        <a href="https://tech.ed.gov/ai/future-of-teaching-and-learning/" target="_blank" rel="noopener">🔗 AI and the Future of Teaching and Learning</a>
-      </div>
-    </article>
-
-  </main>
-
-  <!-- bottom nav -->
-  <nav class="nav">
-    <a href="#top" class="active"><span class="ni"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span>בית</a>
-    <a href="#steps"><span class="ni"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>אתגרים</a>
-    <a href="#article"><span class="ni"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></span>מאמרים</a>
-    <a href="#top"><span class="ni"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></span>פרופיל</a>
-  </nav>
+    <div class="links">
+      <a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noopener">🔗 UNESCO – Generative AI in Education</a>
+      <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">🔗 Future of Jobs Report 2025</a>
+      <a href="https://www.oecd.org/education/2030-project/" target="_blank" rel="noopener">🔗 OECD Future of Education and Skills 2030</a>
+      <a href="https://tech.ed.gov/ai/future-of-teaching-and-learning/" target="_blank" rel="noopener">🔗 AI and the Future of Teaching and Learning</a>
+    </div>
+  </div>
 
 </div>
 
 <script>
+  var entry=document.getElementById('entry');
+  var vChallenge=document.getElementById('view-challenge');
+  var vArticle=document.getElementById('view-article');
+  function show(which){
+    entry.hidden=true;
+    vChallenge.hidden=(which!=='challenge');
+    vArticle.hidden=(which!=='article');
+    window.scrollTo(0,0);
+  }
+  function backHome(){
+    vChallenge.hidden=true;vArticle.hidden=true;entry.hidden=false;window.scrollTo(0,0);
+  }
+  document.querySelectorAll('[data-go]').forEach(function(b){
+    b.addEventListener('click',function(){show(b.getAttribute('data-go'));});
+  });
+  document.querySelectorAll('[data-back]').forEach(function(b){
+    b.addEventListener('click',backHome);
+  });
   document.getElementById('genBtn').addEventListener('click',function(){
     document.getElementById('genNote').hidden=false;
-  });
-  // active state on bottom nav
-  document.querySelectorAll('.nav a').forEach(function(a){
-    a.addEventListener('click',function(){
-      document.querySelectorAll('.nav a').forEach(function(x){x.classList.remove('active')});
-      a.classList.add('active');
-    });
   });
 </script>
 </body>
