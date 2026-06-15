@@ -14,145 +14,162 @@
     --line:#e3e8eb; --line2:#d6dde0;
     --teal:#18a294; --teal-d:#0e7569; --teal-soft:#e7f6f4;
     --shadow:0 18px 50px rgba(20,50,55,.12);
-    --app-w:460px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;background:var(--page);color:var(--ink);
-    font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.65;
-    display:flex;justify-content:center}
-  .app{position:relative;width:100%;max-width:var(--app-w);min-height:100vh;background:var(--app);
-    box-shadow:var(--shadow);display:flex;flex-direction:column}
-  .content{flex:1;padding:22px 18px 40px}
+    font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.65;min-height:100vh}
+  .shell{width:100%;max-width:680px;margin:0 auto;background:var(--app);min-height:100vh;display:flex;flex-direction:column}
+  .inner{padding:clamp(20px,4vw,40px)}
+  @media(min-width:760px){
+    body{padding:30px 16px}
+    .shell{min-height:auto;border-radius:26px;box-shadow:var(--shadow);overflow:hidden;min-height:calc(100vh - 60px)}
+  }
 
-  /* ===== entry ===== */
-  .entry{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
-    text-align:center;padding:32px 26px}
+  /* entry */
+  .entry{min-height:78vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:0}
   .mark{color:var(--teal);margin-bottom:22px}
-  .hero-title{font-size:2.6rem;font-weight:900;margin:0 0 14px;letter-spacing:-1px;line-height:1.1;color:var(--ink)}
+  .hero-title{font-size:clamp(2.4rem,7vw,3.4rem);font-weight:900;margin:0 0 14px;letter-spacing:-1px;line-height:1.08;color:var(--ink)}
   .hero-title em{font-style:normal;color:var(--teal)}
-  .entry .sub{color:var(--teal-d);font-weight:800;font-size:1.05rem;margin:0 0 8px;letter-spacing:.2px}
-  .entry .tag2{color:var(--muted);font-size:1rem;max-width:330px;margin:0 0 36px}
-  .entry-btns{display:flex;flex-direction:column;gap:14px;width:100%;max-width:330px}
+  .entry .sub{color:var(--teal-d);font-weight:800;font-size:1.08rem;margin:0 0 8px}
+  .entry .tag2{color:var(--muted);font-size:1.05rem;max-width:360px;margin:0 0 38px}
+  .entry-btns{display:flex;flex-direction:column;gap:14px;width:100%;max-width:360px}
   .big-btn{appearance:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:1.15rem;
     padding:19px 22px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:11px;transition:.16s;border:1.5px solid transparent}
-  .big-btn .bi{display:grid;place-items:center}
   .big-btn.primary{background:var(--teal);color:#fff;box-shadow:0 14px 30px rgba(24,162,148,.3)}
   .big-btn.primary:hover{background:var(--teal-d);transform:translateY(-2px)}
   .big-btn.outline{background:#fff;color:var(--teal-d);border-color:var(--line2)}
   .big-btn.outline:hover{border-color:var(--teal);background:var(--teal-soft);transform:translateY(-2px)}
 
-  .back{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted);font-weight:700;font-size:.95rem;text-decoration:none;margin-bottom:6px}
+  /* wizard top bar */
+  .bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .back{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--muted);font-weight:700;font-size:.95rem;text-decoration:none}
   .back:hover{color:var(--teal-d)}
-  .view-title{font-size:1.5rem;font-weight:900;color:var(--teal-d);margin:6px 0 2px;letter-spacing:-.3px}
+  .counter{font-size:.85rem;font-weight:800;color:var(--teal-d)}
+  .progress{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin:6px 0 22px}
+  .progress-fill{height:100%;background:var(--teal);width:16%;transition:.3s;border-radius:999px}
 
-  .sec{padding:18px 0;border-bottom:1px solid var(--line)}
-  .sec:last-of-type{border-bottom:0}
+  .panel{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .sec-h{display:flex;align-items:center;gap:9px;margin-bottom:4px}
   .sec-h .ic{width:24px;height:24px;color:var(--teal);flex:none;display:grid;place-items:center}
-  .sec-h h2{margin:0;font-size:1.16rem;font-weight:800;color:var(--teal-d);letter-spacing:-.3px}
-  .sec .sub{color:var(--muted);margin:0 0 4px;font-size:.96rem}
+  .sec-h h2{margin:0;font-size:clamp(1.2rem,3vw,1.5rem);font-weight:900;color:var(--teal-d);letter-spacing:-.3px}
+  .sub{color:var(--muted);margin:0 0 6px;font-size:1rem}
 
-  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pills{display:flex;flex-wrap:wrap;gap:11px;margin-top:18px}
   .pill{position:relative;cursor:pointer;user-select:none}
   .pill input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
-  .pill span{display:inline-flex;padding:10px 18px;border-radius:999px;border:1px solid var(--line2);
-    background:#fff;font-weight:600;font-size:.96rem;color:var(--ink);transition:.15s}
+  .pill span{display:inline-flex;padding:12px 20px;border-radius:999px;border:1px solid var(--line2);background:#fff;font-weight:600;font-size:1rem;color:var(--ink);transition:.15s}
   .pill:hover span{border-color:var(--teal)}
   .pill:has(input:checked) span{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
 
-  .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:1rem;
-    padding:14px 28px;border-radius:13px;background:var(--teal);color:#fff;display:inline-flex;align-items:center;gap:9px;
-    transition:.15s;margin-top:16px;box-shadow:0 10px 22px rgba(24,162,148,.28)}
+  .field{width:100%;background:#fff;border:1px solid var(--line2);border-radius:14px;color:var(--ink);font-family:inherit;font-size:1.02rem;padding:15px 16px;margin-top:16px}
+  textarea.field{resize:vertical;min-height:120px}
+  .field:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+
+  .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:1.02rem;
+    padding:15px 26px;border-radius:14px;background:var(--teal);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s;box-shadow:0 10px 22px rgba(24,162,148,.26)}
   .btn:hover{background:var(--teal-d);transform:translateY(-1px)}
-  .gen-note{margin-top:14px;background:#fff7e9;border:1px solid #f0dcb0;border-radius:12px;padding:12px 15px;color:#9a6b13;font-weight:600}
+  .btn.ghost{background:#fff;color:var(--teal-d);border:1.5px solid var(--line2);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--teal);background:var(--teal-soft)}
+  .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+  #genBtn{margin-top:18px}
 
-  /* task card */
-  .taskcard{margin-top:16px;border:1px solid var(--teal);border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(24,162,148,.16);animation:pop .25s ease}
-  @keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .taskcard .tc-h{background:var(--teal);color:#fff;padding:12px 16px;font-weight:800;display:flex;align-items:center;gap:9px;font-size:.98rem}
+  .taskcard{margin-top:18px;border:1px solid var(--teal);border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(24,162,148,.16);animation:fade .25s ease}
+  .taskcard .tc-h{background:var(--teal);color:#fff;padding:13px 16px;font-weight:800;display:flex;align-items:center;gap:9px;font-size:1rem}
   .taskcard .tc-b{padding:16px 18px;background:#fff}
-  .taskcard .tc-title{font-weight:900;font-size:1.2rem;color:var(--ink);margin-bottom:4px}
-  .taskcard .tc-kind{color:var(--teal-d);font-weight:700;font-size:.85rem;margin-bottom:12px}
+  .taskcard .tc-title{font-weight:900;font-size:1.25rem;color:var(--ink);margin-bottom:4px}
+  .taskcard .tc-kind{color:var(--teal-d);font-weight:700;font-size:.88rem;margin-bottom:12px}
   .taskcard ol{margin:0;padding-inline-start:20px;color:#33414a}
-  .taskcard li{margin:7px 0}
+  .taskcard li{margin:8px 0}
 
-  .crows{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-  .crow{display:flex;align-items:center;gap:12px;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:13px;padding:13px 15px;transition:.15s}
+  .crows{display:flex;flex-direction:column;gap:11px;margin-top:18px}
+  .crow{display:flex;align-items:center;gap:12px;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:13px;padding:14px 16px;transition:.15s}
   .crow:hover{border-color:var(--teal)}
   .crow input{position:absolute;opacity:0;width:0;height:0}
-  .box{width:21px;height:21px;border:2px solid var(--line2);border-radius:6px;flex:none;display:grid;place-items:center;transition:.15s}
+  .box{width:22px;height:22px;border:2px solid var(--line2);border-radius:6px;flex:none;display:grid;place-items:center;transition:.15s}
   .box svg{opacity:0;color:#fff}
   .crow .lab{flex:1;text-align:right;font-weight:600}
   .crow:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
   .crow:has(input:checked) .box{background:var(--teal);border-color:var(--teal)}
   .crow:has(input:checked) .box svg{opacity:1}
 
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:18px}
   .card{position:relative;cursor:pointer;background:#fff;border:1px solid var(--line2);border-radius:16px;padding:18px 12px;text-align:center;transition:.15s}
   .card input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
   .card .cic{width:44px;height:44px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);display:grid;place-items:center;margin:0 auto 9px;transition:.15s}
-  .card .cl{font-weight:700;font-size:.95rem}
+  .card .cl{font-weight:700;font-size:.96rem}
   .card:hover{border-color:var(--teal)}
   .card:has(input:checked){border-color:var(--teal);background:var(--teal-soft)}
   .card:has(input:checked) .cic{background:var(--teal);color:#fff}
 
-  .qcard{margin-top:14px;background:#fafbfb;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+  .qcard{margin-top:18px;background:#fafbfb;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
   .qlist{margin:0;padding:0;list-style:none}
-  .qlist li{margin:8px 0;font-weight:600;display:flex;align-items:center;gap:9px}
+  .qlist li{margin:9px 0;font-weight:600;display:flex;align-items:center;gap:9px}
   .qlist .x{color:#d06363;font-weight:900}
   .qlist .v{color:var(--teal);font-weight:900}
 
-  .finish{margin:20px 0 4px;background:var(--teal-soft);border:1px solid #bfe7e1;border-radius:20px;padding:28px 22px;text-align:center}
-  .finish h2{margin:0 0 .3em;font-size:1.2rem;font-weight:800;color:var(--teal-d)}
-  .finish .punch{font-size:1.3rem;font-weight:900;line-height:1.4;color:var(--teal-d);margin:14px 0}
-  .finish p{color:#3d4a4f;margin:0;font-size:.96rem}
-  .finish .next{margin-top:16px;display:inline-block;font-weight:800;color:#fff;background:var(--teal);padding:9px 18px;border-radius:999px}
+  .need{color:#c0560f;font-weight:700;font-size:.9rem;margin-top:12px;min-height:1.1em}
+  .wiznav{display:flex;gap:12px;margin-top:26px}
+  .wiznav .btn{flex:1}
 
+  /* summary */
+  .sumhead{text-align:center;margin-bottom:8px}
+  .sumhead .ribbon{display:inline-block;font-weight:800;color:var(--teal-d);background:var(--teal-soft);border:1px solid #bfe7e1;padding:7px 16px;border-radius:999px;font-size:.85rem;margin-bottom:10px}
+  .sumhead h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:900;margin:0;color:var(--ink)}
+  .sumcard{border:1px solid var(--line2);border-radius:18px;overflow:hidden;margin-top:18px}
+  .sumsec{padding:16px 18px;border-bottom:1px solid var(--line)}
+  .sumsec:last-child{border-bottom:0}
+  .sumsec .t{font-size:.78rem;letter-spacing:.6px;font-weight:800;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+  .sumsec .v{font-weight:600;color:var(--ink)}
+  .sumsec.human{background:var(--teal-soft)}
+  .sumsec ol{margin:6px 0 0;padding-inline-start:20px}
+  .sumsec li{margin:5px 0;color:#33414a}
+  .sum-punch{font-weight:900;color:var(--teal-d);text-align:center;font-size:1.15rem;margin:20px 0 4px;line-height:1.4}
+  .sum-actions{display:flex;gap:12px;margin-top:18px}
+  .sum-actions .btn{flex:1}
+  .next-day{text-align:center;margin-top:20px;color:var(--muted);font-weight:700}
+
+  /* article */
   .article .tag{font-size:.74rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);font-weight:800}
-  .article h2{font-size:1.5rem;margin:.25em 0 .05em;font-weight:900;color:var(--ink);letter-spacing:-.4px;line-height:1.25}
+  .article h2{font-size:clamp(1.4rem,4vw,1.9rem);margin:.25em 0 .05em;font-weight:900;color:var(--ink);letter-spacing:-.4px;line-height:1.25}
   .article .byline{color:var(--muted);font-weight:700;margin-bottom:14px}
-  .article h3{font-size:1.12rem;margin:1.3em 0 .25em;font-weight:800;color:var(--teal-d)}
+  .article h3{font-size:1.15rem;margin:1.3em 0 .25em;font-weight:800;color:var(--teal-d)}
   .article p{margin:.65em 0;color:#33414a}
   .article ul{padding-inline-start:20px;color:#33414a}
-  .article li{margin:6px 0}
-  .article li b{color:var(--ink)}
+  .article li{margin:6px 0}.article li b{color:var(--ink)}
   .links{margin-top:20px;border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:9px}
-  .links a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:var(--teal-d);
-    background:var(--teal-soft);border:1px solid #cdeae5;padding:11px 14px;border-radius:12px}
+  .links a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;color:var(--teal-d);background:var(--teal-soft);border:1px solid #cdeae5;padding:11px 14px;border-radius:12px}
   .links a:hover{background:#d7f0ec}
   [hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="shell"><div class="inner">
 
-  <!-- ===== מסך כניסה ===== -->
+  <!-- ===== כניסה ===== -->
   <section class="entry" id="entry">
     <span class="mark"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></span>
     <h1 class="hero-title">אתגר <em>4 ימים</em><br/>לסוף שנה</h1>
     <p class="sub">יום 4 · המיומנות האנושית</p>
     <p class="tag2">AI יכול לייצר תוכן. אנשי חינוך מייצרים משמעות.</p>
     <div class="entry-btns">
-      <button class="big-btn primary" data-go="challenge">
-        <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>
-        אתגר יום 4
-      </button>
-      <button class="big-btn outline" data-go="article">
-        <span class="bi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg></span>
-        הרחבה
-      </button>
+      <button class="big-btn primary" data-go="challenge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg> אתגר יום 4</button>
+      <button class="big-btn outline" data-go="article"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/></svg> הרחבה</button>
     </div>
   </section>
 
-  <!-- ===== אתגר ===== -->
-  <div class="content" id="view-challenge" hidden>
-    <a class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
-    <div class="view-title">אתגר יום 4</div>
+  <!-- ===== אתגר (אשף, שאלה אחת בכל פעם) ===== -->
+  <div id="view-challenge" hidden>
+    <div class="bar">
+      <a class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
+      <div class="counter" id="counter">שלב 1 מתוך 6</div>
+    </div>
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
 
     <!-- שלב 1 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke-linecap="round"/><circle cx="12" cy="12" r="4"/></svg></span><h2>תנו ל-AI לעבוד</h2></div>
+    <div class="panel" id="p1">
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke-linecap="round"/><circle cx="12" cy="12" r="4"/></svg></span><h2>תנו ל-AI לעבוד</h2></div>
       <p class="sub">מה תרצו שהבינה המלאכותית תיצור עבורכם?</p>
       <div class="pills">
         <label class="pill"><input type="radio" name="s1" value="שיעור"><span>שיעור</span></label>
@@ -162,11 +179,11 @@
         <label class="pill"><input type="radio" name="s1" value="פעילות כיתתית"><span>פעילות כיתתית</span></label>
         <label class="pill"><input type="radio" name="s1" value="סיכום נושא"><span>סיכום נושא</span></label>
       </div>
-    </section>
+    </div>
 
     <!-- שלב 2 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h2>בחרו נושא</h2></div>
+    <div class="panel" id="p2" hidden>
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h2>בחרו נושא</h2></div>
       <p class="sub">על איזה נושא ליצור את התוצר?</p>
       <div class="pills">
         <label class="pill"><input type="radio" name="s2" value="מלחמת העולם הראשונה"><span>מלחמת העולם הראשונה</span></label>
@@ -174,93 +191,101 @@
         <label class="pill"><input type="radio" name="s2" value="משפט פיתגורס"><span>משפט פיתגורס</span></label>
         <label class="pill"><input type="radio" name="s2" value="כתיבת טיעון"><span>כתיבת טיעון</span></label>
       </div>
-    </section>
+    </div>
 
     <!-- שלב 3 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span><h2>תוצר ה-AI</h2></div>
-      <p class="sub">לחצו "צור" — ויופיע כרטיס משימה מוכן לפי הבחירה שלכם.</p>
-      <button class="btn" id="genBtn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
-        צור
-      </button>
+    <div class="panel" id="p3" hidden>
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span><h2>תוצר ה-AI</h2></div>
+      <p class="sub">לחצו "צור" ותקבלו כרטיס משימה מוכן לפי הבחירה שלכם.</p>
+      <button class="btn" id="genBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg> צור</button>
       <div id="taskOut"></div>
-    </section>
+    </div>
 
     <!-- שלב 4 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h2>עכשיו מגיע החלק החשוב</h2></div>
-      <p class="sub">הסתכלו על התוצר: מה חסר כאן כדי שהתלמידים שלי באמת יתחברו אליו?</p>
+    <div class="panel" id="p4" hidden>
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><h2>החלק החשוב: מה תוסיפו מעצמכם?</h2></div>
+      <p class="sub">סמנו מה חסר בתוצר — ואז כתבו את התוספת האנושית שלכם.</p>
       <div class="crows">
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">סיפור אמיתי</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">דוגמה מהכיתה</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">קשר לעולם של התלמיד</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">שאלה מעוררת חשיבה</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">דיון ערכי</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">רגש</span></label>
-        <label class="crow"><input type="checkbox"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">הומור</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="סיפור אמיתי"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">סיפור אמיתי</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="דוגמה מהכיתה"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">דוגמה מהכיתה</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="קשר לעולם של התלמיד"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">קשר לעולם של התלמיד</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="שאלה מעוררת חשיבה"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">שאלה מעוררת חשיבה</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="דיון ערכי"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">דיון ערכי</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="רגש"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">רגש</span></label>
+        <label class="crow"><input type="checkbox" name="miss" value="הומור"><span class="box"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span class="lab">הומור</span></label>
       </div>
-    </section>
+      <label class="sub" style="display:block;margin-top:18px;font-weight:700;color:var(--ink)">כתבו את התוספת שלכם (הרגש / הסיפור / הדוגמה שתביאו):</label>
+      <textarea class="field" id="addition" placeholder="לדוגמה: אספר על השכן שלי שחווה את זה / אשאל אותם מתי הם הרגישו ככה…"></textarea>
+    </div>
 
     <!-- שלב 5 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a6 6 0 0 0 6-6c0-5-4.5-8-10-8Z"/><circle cx="8.5" cy="7.5" r="1.2" fill="currentColor"/><circle cx="6.5" cy="12.5" r="1.2" fill="currentColor"/><circle cx="13.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span><h2>המיומנות האנושית</h2></div>
-      <p class="sub">איזו מיומנות אנושית תוכל להוסיף הכי הרבה ערך לתוצר?</p>
+    <div class="panel" id="p5" hidden>
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a6 6 0 0 0 6-6c0-5-4.5-8-10-8Z"/><circle cx="8.5" cy="7.5" r="1.2" fill="currentColor"/><circle cx="6.5" cy="12.5" r="1.2" fill="currentColor"/></svg></span><h2>המיומנות האנושית</h2></div>
+      <p class="sub">איזו מיומנות אנושית תוסיף הכי הרבה ערך לתוצר?</p>
       <div class="cards">
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><div class="cl">חשיבה ביקורתית</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a6 6 0 0 0 6-6c0-5-4.5-8-10-8Z"/></svg></div><div class="cl">יצירתיות</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-4-4"/><path d="M8 11a4 4 0 1 1 4-4"/><path d="M2 21a6 6 0 0 1 12 0M10 21a6 6 0 0 1 12 0"/></svg></div><div class="cl">שיתוף פעולה</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7h14M5 7l-3 6a3 3 0 0 0 6 0L5 7Zm14 0-3 6a3 3 0 0 0 6 0l-3-6Z"/></svg></div><div class="cl">שיקול דעת</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.4 3-5.5A4.5 4.5 0 0 0 12 5 4.5 4.5 0 0 0 2 8.5c0 2.1 1.5 4 3 5.5l7 7Z"/></svg></div><div class="cl">אמפתיה</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 17H6a2 2 0 0 0-2 2"/></svg></div><div class="cl">למידה עצמאית</div></label>
-        <label class="card"><input type="radio" name="s5"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4a2 2 0 1 1 4 0 2 2 0 0 0 2 2h.5a2 2 0 0 1 0 4 2 2 0 0 0 0 4H17a2 2 0 0 0-2 2 2 2 0 1 1-4 0 2 2 0 0 0-2-2H6.5a2 2 0 0 1 0-4 2 2 0 0 0 0-4H6a2 2 0 0 1 2-2 2 2 0 0 0 2-2Z"/></svg></div><div class="cl">פתרון בעיות</div></label>
+        <label class="card"><input type="radio" name="s5" value="חשיבה ביקורתית"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><div class="cl">חשיבה ביקורתית</div></label>
+        <label class="card"><input type="radio" name="s5" value="יצירתיות"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2 0-.8.7-1.5 1.5-1.5H16a6 6 0 0 0 6-6c0-5-4.5-8-10-8Z"/></svg></div><div class="cl">יצירתיות</div></label>
+        <label class="card"><input type="radio" name="s5" value="שיתוף פעולה"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-4-4"/><path d="M8 11a4 4 0 1 1 4-4"/><path d="M2 21a6 6 0 0 1 12 0M10 21a6 6 0 0 1 12 0"/></svg></div><div class="cl">שיתוף פעולה</div></label>
+        <label class="card"><input type="radio" name="s5" value="שיקול דעת"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7h14M5 7l-3 6a3 3 0 0 0 6 0L5 7Zm14 0-3 6a3 3 0 0 0 6 0l-3-6Z"/></svg></div><div class="cl">שיקול דעת</div></label>
+        <label class="card"><input type="radio" name="s5" value="אמפתיה"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.4 3-5.5A4.5 4.5 0 0 0 12 5 4.5 4.5 0 0 0 2 8.5c0 2.1 1.5 4 3 5.5l7 7Z"/></svg></div><div class="cl">אמפתיה</div></label>
+        <label class="card"><input type="radio" name="s5" value="למידה עצמאית"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M19 17H6a2 2 0 0 0-2 2"/></svg></div><div class="cl">למידה עצמאית</div></label>
+        <label class="card"><input type="radio" name="s5" value="פתרון בעיות"><div class="cic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4a2 2 0 1 1 4 0 2 2 0 0 0 2 2h.5a2 2 0 0 1 0 4 2 2 0 0 0 0 4H17a2 2 0 0 0-2 2 2 2 0 1 1-4 0 2 2 0 0 0-2-2H6.5a2 2 0 0 1 0-4 2 2 0 0 0 0-4H6a2 2 0 0 1 2-2 2 2 0 0 0 2-2Z"/></svg></div><div class="cl">פתרון בעיות</div></label>
       </div>
-    </section>
+    </div>
 
-    <!-- שלב 7 -->
-    <section class="sec">
-      <div class="sec-h"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg></span><h2>השאלה הגדולה</h2></div>
-      <p class="sub">AI יודע לעשות הרבה. אבל… חשבו על דבר אחד בלבד ש:</p>
-      <div class="qcard">
-        <ul class="qlist">
-          <li><span class="x">✕</span> AI לא מכיר</li>
-          <li><span class="x">✕</span> גוגל לא יודע</li>
-          <li><span class="x">✕</span> ספר לימוד לא יכול ללמד</li>
-          <li><span class="v">✓</span> אבל אתם מביאים בכל יום לכיתה</li>
-        </ul>
+    <!-- שלב 6 -->
+    <div class="panel" id="p6" hidden>
+      <div class="sec-h"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg></span><h2>השאלה הגדולה</h2></div>
+      <p class="sub">AI יודע לעשות הרבה. אבל… כתבו דבר אחד בלבד ש:</p>
+      <div class="qcard"><ul class="qlist">
+        <li><span class="x">✕</span> AI לא מכיר</li>
+        <li><span class="x">✕</span> גוגל לא יודע</li>
+        <li><span class="x">✕</span> ספר לימוד לא יכול ללמד</li>
+        <li><span class="v">✓</span> אבל אתם מביאים בכל יום לכיתה</li>
+      </ul></div>
+      <textarea class="field" id="bigAns" placeholder="הדבר היחיד שרק אני מביא/ה לכיתה הוא…"></textarea>
+    </div>
+
+    <!-- סיכום / התוצר -->
+    <div class="panel" id="psum" hidden>
+      <div class="sumhead">
+        <span class="ribbon">סיימתם · זה התוצר שלכם</span>
+        <h2>התוצר שלך ליום 4</h2>
       </div>
-    </section>
+      <div class="sumcard" id="sumcard"></div>
+      <div class="sum-punch">AI ייצר את התוכן.<br/>אתם הוספתם את המשמעות.</div>
+      <div class="sum-actions">
+        <button class="btn" id="copyBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg> <span id="copyTxt">העתקת התוצר</span></button>
+        <button class="btn ghost" id="restartBtn">להתחלה</button>
+      </div>
+      <div class="next-day">נתראה ביום 3 →</div>
+    </div>
 
-    <div class="finish">
-      <h2>אם הגעתם עד לכאן, כנראה שהבנתם את הרעיון המרכזי של היום</h2>
-      <div class="punch">AI יכול לייצר תוכן.<br/>אנשי חינוך מייצרים משמעות.</div>
-      <p>ככל שהבינה המלאכותית משתפרת, כך גדל הערך של היכולות האנושיות: חשיבה, שיקול דעת, יצירתיות, אמפתיה והיכרות עם הלומדים.</p>
-      <span class="next">נתראה ביום 3 →</span>
+    <!-- ניווט אשף -->
+    <div class="need" id="need"></div>
+    <div class="wiznav" id="wiznav">
+      <button class="btn ghost" id="backStep">חזרה</button>
+      <button class="btn" id="nextStep">הבא</button>
     </div>
   </div>
 
   <!-- ===== הרחבה ===== -->
-  <div class="content article" id="view-article" hidden>
-    <a class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
+  <div id="view-article" class="article" hidden>
+    <a class="back" data-back style="margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg> חזרה</a>
     <div class="tag">מאמר הרחבה</div>
     <h2>אם AI יודע הכל, מה נשאר לנו ללמד?</h2>
     <div class="byline">ינון זנו</div>
-
     <p>הבינה המלאכותית נכנסה לחיים שלנו בסערה. מה שהתחיל ככלי ניסיוני הפך מהר מאוד לעוזר אישי, מורה פרטי, מתכנת ושותף מלא לחשיבה. אנחנו יכולים היום להפיק בשניות סיכומי שיעור, פתרונות לתרגילים מורכבים, מצגות שלמות ואפילו לקבל תשובות מותאמות אישית לבגרות.</p>
     <p>לנוכח המציאות הזו הרבה אנשי חינוך שואלים את עצמם: אם ה-AI יודע לעשות כל כך הרבה, מה התפקיד שלנו כמורים? השאלה הזו לא מגיעה רק מסקרנות טכנולוגית. היא נוגעת בבסיס העשייה שלנו: מה באמת חשוב ללמד בעולם שבו כל המידע זמין בלחיצת כפתור?</p>
-
     <h3>התחרות היא לא על ידע</h3>
     <p>הטעות הכי גדולה בדיון הזה היא ההנחה שאנחנו בתחרות מול המכונה על ידע. אבל בית הספר מעולם לא נועד להיות אנציקלופדיה. גם לפני ה-ChatGPT היו כאן ספרים, מנועי חיפוש ומאגרי מידע. הייחוד של החינוך אף פעם לא היה הנגשת המידע עצמו אלא היכולת לקחת את המידע הזה, להפוך אותו להבנה חותכת ולהפוך את ההבנה למשמעות ולפעולה.</p>
     <p>AI יכול לזרוק עלינו מידע אינסופי. הוא פשוט לא יכול להחליט בשבילנו מה מוסרי, מה נכון בהקשר מסוים או מה באמת משמעותי לתלמיד.</p>
-
     <h3>הידע לא נעלם – התפקיד שלו השתנה</h3>
     <p>פעם הערכנו תלמידים לפי הכמות שהם זוכרים. מי שידע לשלוף עובדות, תאריכים ונוסחאות נחשב לחזק יותר. היום היכולת החשובה היא כבר לא רק "לדעת". היכולת החשובה היא להבין, לבקר, ליישם ולשאול שאלות חכמות. למעשה, OECD מדגיש כי בעולם שבו המידע זמין לכולם, הערך עובר מהידיעה עצמה ליכולת להשתמש בידע באופן מושכל, ביקורתי ואחראי.</p>
     <p>דווקא בגלל שהמידע כל כך נגיש אנחנו חייבים ללמד את התלמידים איך להבחין בין מידע איכותי לפייק ניוז, בין עובדה לדעה ובין תשובה שנשמעת נכונה לתשובה אמיתית שיש לה משמעות.</p>
-
     <h3>האשליה של העבודה המושלמת</h3>
     <p>קחו לדוגמה עבודה להגשה. תלמיד אחד כותב אותה בעצמו במשך שלוש שעות. תלמיד שני מבקש מה-AI לכתוב אותה בשתי דקות. סביר להניח שהעבודה של התלמיד השני תהיה מנוסחת טוב יותר ואפילו מקיפה יותר. אבל האם הוא באמת למד משהו? לא בטוח.</p>
     <p>הפער הוא לא בתוצר הסופי אלא בתהליך החשיבה. מי בחר את המקורות? מי אימת את המידע? מי זיהה הנחות סמויות, חיבר בין הרעיונות ושאל את השאלות החדשות? הלמידה האמיתית קורית בראש, לא בהקלדה.</p>
-
     <h3>המיומנויות שעושות את ההבדל</h3>
     <p>מגמה זו אינה רק תחושה של אנשי חינוך. על פי World Economic Forum, המיומנויות המבוקשות ביותר בשנים הקרובות יהיו חשיבה אנליטית, יצירתיות, למידה מתמשכת, גמישות ויכולת לעבוד עם אנשים. ככל שהטכנולוגיה מתקדמת המיומנויות האנושיות שלנו הופכות לקריטיות יותר:</p>
     <ul>
@@ -269,15 +294,12 @@
       <li><b>שיתוף פעולה:</b> למידה היא לא רק תהליך טכני אלא דיאלוג אנושי בגובה העיניים.</li>
       <li><b>שיקול דעת:</b> היכולת לקבל החלטות במצבי אי-ודאות ולהפעיל שיפוט מוסרי וערכי.</li>
     </ul>
-
     <h3>אז למה המורה עדיין רלוונטי? אולי יותר מתמיד</h3>
     <p>AI יכול להסביר חומר מצוין. המורה יודע לאיזה תלמיד צריך להסביר אותו אחרת. AI יכול לייצר תרגיל מדויק. המורה יודע מי מהתלמידים ייכנס לחרדה מולו. AI יכול לנסח הודעה תקנית להורים. המורה יודע אילו מילים יבנו שם אמון אמיתי.</p>
     <p>הערך שלנו כאנשי חינוך לא מגיע רק ממה שאנחנו יודעים. הוא נובע מהיכולת שלנו לראות את הילד שמולנו, להבין את הצרכים שלו, לאתגר אותו, להאמין בו ולעזור לו לצמוח. אלו יכולות אנושיות נטו.</p>
-
     <h3>האתגר האמיתי של מערכת החינוך</h3>
     <p>האתגר שלנו הוא לא לנצח את הבינה המלאכותית אלא לעבוד איתה חכם. במקום לשאול "איך AI יכול להחליף אותנו?", אנחנו צריכים לשאול: "איך AI יכול לפנות לנו זמן כדי לעשות את מה שרק אנחנו יכולים לעשות?". ברגע שהטכנולוגיה לוקחת עליה את המשימות הטכניות והשחורות נפתח לנו חלון אדיר להשקיע יותר בשיחות אישיות, בחשיבה משותפת ובפיתוח מיומנויות לחיים.</p>
     <p>הבינה המלאכותית לא מסמנת את סוף החינוך אלא פותחת לנו פרק חדש ומרתק. השאלה היום היא כבר לא "מה התלמיד יודע?" אלא "מה התלמיד יודע לעשות עם מה שהוא יודע?". וכאן, דווקא כאן, המקום שלנו כאנשי חינוך הופך למשמעותי מתמיד.</p>
-
     <div class="links">
       <a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noopener">UNESCO – Generative AI in Education</a>
       <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">Future of Jobs Report 2025</a>
@@ -286,18 +308,18 @@
     </div>
   </div>
 
-</div>
+</div></div>
 
 <script>
   var entry=document.getElementById('entry');
-  var vChallenge=document.getElementById('view-challenge');
-  var vArticle=document.getElementById('view-article');
-  function show(which){entry.hidden=true;vChallenge.hidden=(which!=='challenge');vArticle.hidden=(which!=='article');window.scrollTo(0,0);}
-  function backHome(){vChallenge.hidden=true;vArticle.hidden=true;entry.hidden=false;window.scrollTo(0,0);}
-  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-go'));});});
+  var vCh=document.getElementById('view-challenge');
+  var vAr=document.getElementById('view-article');
+  function showView(w){entry.hidden=true;vCh.hidden=(w!=='challenge');vAr.hidden=(w!=='article');if(w==='challenge'){cur=0;renderStep();}window.scrollTo(0,0);}
+  function backHome(){vCh.hidden=true;vAr.hidden=true;entry.hidden=false;window.scrollTo(0,0);}
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){showView(b.getAttribute('data-go'));});});
   document.querySelectorAll('[data-back]').forEach(function(b){b.addEventListener('click',backHome);});
 
-  // ===== task generation (built-in, no typing) =====
+  /* ===== task templates (built-in) ===== */
   var TPL={
     "שיעור":function(t){return ["פתיחה: שאלה מעוררת שמחברת את התלמידים ל"+t+".","גוף: שלושה רעיונות מרכזיים, עם דוגמה לכל אחד.","סיכום: שאלת רפלקציה שמחברת את "+t+" לחיי התלמידים."];},
     "משימה לתלמידים":function(t){return ["הכירו את הרקע ל"+t+".","בחרו היבט אחד שמעניין אתכם והעמיקו בו.","הציגו את מה שלמדתם בפורמט לבחירתכם: פוסטר, סרטון או מצגת."];},
@@ -307,17 +329,89 @@
     "סיכום נושא":function(t){return ["שלוש הנקודות החשובות ביותר ב"+t+".","מושג מפתח אחד שכדאי לזכור.","שאלה פתוחה אחת שנשארת למחשבה."];}
   };
   function selVal(name){var el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:null;}
-  document.getElementById('genBtn').addEventListener('click',function(){
-    var type=selVal('s1'), topic=selVal('s2');
-    var out=document.getElementById('taskOut');
-    if(!type||!topic){out.innerHTML='<div class="gen-note">בחרו קודם סוג תוצר (שלב 1) ונושא (שלב 2) ☝️</div>';return;}
-    var items=(TPL[type]||TPL['משימה לתלמידים'])(topic);
-    var li=items.map(function(x){return '<li>'+x+'</li>';}).join('');
-    out.innerHTML='<div class="taskcard"><div class="tc-h">'+
-      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1Z"/><path d="M9 4a1 1 0 0 0-1 1v1h8V5a1 1 0 0 0-1-1"/></svg>'+
-      'כרטיס משימה · '+type+'</div>'+
-      '<div class="tc-b"><div class="tc-title">'+topic+'</div><div class="tc-kind">תוצר מוכן — התאימו אותו לכיתה שלכם 👇</div><ol>'+li+'</ol></div></div>';
+  function checkedVals(name){return Array.prototype.map.call(document.querySelectorAll('input[name="'+name+'"]:checked'),function(x){return x.value;});}
+  function curTask(){var ty=selVal('s1'),to=selVal('s2');if(!ty||!to)return null;return {type:ty,topic:to,items:(TPL[ty]||TPL['משימה לתלמידים'])(to)};}
+
+  function renderTaskCard(){
+    var out=document.getElementById('taskOut');var tk=curTask();
+    if(!tk){out.innerHTML='<div class="need" style="margin-top:14px">בחרו קודם סוג תוצר ונושא (שלבים 1–2)</div>';return;}
+    out.innerHTML='<div class="taskcard"><div class="tc-h"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h2V5a1 1 0 0 1 1-1Z"/></svg> כרטיס משימה · '+tk.type+'</div><div class="tc-b"><div class="tc-title">'+tk.topic+'</div><div class="tc-kind">תוצר מוכן — התאימו אותו לכיתה שלכם</div><ol>'+tk.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol></div></div>';
+  }
+  document.getElementById('genBtn').addEventListener('click',renderTaskCard);
+
+  /* ===== wizard ===== */
+  var stepIds=['p1','p2','p3','p4','p5','p6'];
+  var cur=0;
+  var counter=document.getElementById('counter');
+  var fill=document.getElementById('progressFill');
+  var need=document.getElementById('need');
+  var wiznav=document.getElementById('wiznav');
+  var nextBtn=document.getElementById('nextStep');
+  var backBtn=document.getElementById('backStep');
+  var psum=document.getElementById('psum');
+
+  function renderStep(){
+    need.textContent='';
+    psum.hidden=true;wiznav.hidden=false;
+    stepIds.forEach(function(id,i){document.getElementById(id).hidden=(i!==cur);});
+    counter.textContent='שלב '+(cur+1)+' מתוך '+stepIds.length;
+    fill.style.width=((cur+1)/stepIds.length*100)+'%';
+    backBtn.disabled=(cur===0);
+    nextBtn.textContent=(cur===stepIds.length-1)?'סיום · קבלת התוצר':'הבא';
+    if(stepIds[cur]==='p3'){renderTaskCard();}
+    window.scrollTo(0,0);
+  }
+  function guard(){
+    if(cur===0&&!selVal('s1')){need.textContent='בחרו סוג תוצר כדי להמשיך';return false;}
+    if(cur===1&&!selVal('s2')){need.textContent='בחרו נושא כדי להמשיך';return false;}
+    return true;
+  }
+  nextBtn.addEventListener('click',function(){
+    if(!guard())return;
+    if(cur<stepIds.length-1){cur++;renderStep();}
+    else{buildSummary();}
   });
+  backBtn.addEventListener('click',function(){if(cur>0){cur--;renderStep();}});
+
+  function buildSummary(){
+    var tk=curTask();
+    var miss=checkedVals('miss');
+    var add=(document.getElementById('addition').value||'').trim();
+    var skill=selVal('s5')||'—';
+    var big=(document.getElementById('bigAns').value||'').trim();
+    var html='';
+    if(tk){
+      html+='<div class="sumsec"><div class="t">תוצר ה-AI · '+tk.type+'</div><div class="v">'+tk.topic+'</div><ol>'+tk.items.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol></div>';
+    }
+    html+='<div class="sumsec human"><div class="t">מה שרק אתם הוספתם</div><div class="v">'+(miss.length?('סימנתם: '+miss.join(', ')+'<br/>'):'')+(add?add:'<span style="color:var(--muted)">(לא נכתבה תוספת)</span>')+'</div></div>';
+    html+='<div class="sumsec"><div class="t">המיומנות האנושית</div><div class="v">'+skill+'</div></div>';
+    html+='<div class="sumsec human"><div class="t">הדבר היחיד שרק אתם מביאים לכיתה</div><div class="v">'+(big?big:'<span style="color:var(--muted)">(לא נכתב)</span>')+'</div></div>';
+    document.getElementById('sumcard').innerHTML=html;
+
+    // plain text for copy
+    var lines=['אתגר יום 4 — התוצר שלי',''];
+    if(tk){lines.push('תוצר ה-AI ('+tk.type+'): '+tk.topic);tk.items.forEach(function(x){lines.push('• '+x);});lines.push('');}
+    lines.push('מה שרק אני הוספתי (האנושי):');
+    if(miss.length)lines.push('סימנתי: '+miss.join(', '));
+    if(add)lines.push(add);
+    lines.push('');
+    lines.push('מיומנות אנושית: '+skill);
+    lines.push('');
+    lines.push('הדבר היחיד שרק אני מביא/ה לכיתה:');
+    if(big)lines.push(big);
+    window._sumText=lines.join('\n');
+
+    stepIds.forEach(function(id){document.getElementById(id).hidden=true;});
+    wiznav.hidden=true;need.textContent='';
+    psum.hidden=false;counter.textContent='הושלם';fill.style.width='100%';
+    window.scrollTo(0,0);
+  }
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    navigator.clipboard.writeText(window._sumText||'').then(function(){
+      var t=document.getElementById('copyTxt');t.textContent='הועתק!';setTimeout(function(){t.textContent='העתקת התוצר';},1800);
+    });
+  });
+  document.getElementById('restartBtn').addEventListener('click',function(){cur=0;renderStep();});
 </script>
 </body>
 </html>
