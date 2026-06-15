@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>יום 4 · המיומנות האנושית — אתגר סוף שנה</title>
+<meta name="description" content="יום 4 באתגר סוף השנה: תנו ל-AI לעבוד, ואז גלו מה רק אתם, אנשי החינוך, יכולים להוסיף." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#14110f; --bg2:#1b1714; --card:#221c17; --card2:#2a221b;
+    --ink:#f5ecdf; --muted:#b6a88f; --faint:#8a7d68;
+    --line:rgba(245,236,223,.10); --line2:rgba(245,236,223,.16);
+    --amber:#e8a33d; --amber2:#f3bd66; --teal:#52b9a6; --rose:#cf8aa6;
+    --ok:#52b9a6;
+    --shadow:0 24px 60px rgba(0,0,0,.5);
+    --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);line-height:1.7;
+    font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);
+    background-image:
+      radial-gradient(900px 500px at 88% -8%, rgba(232,163,61,.10), transparent 60%),
+      radial-gradient(800px 500px at 4% 8%, rgba(82,185,166,.08), transparent 55%);
+    background-attachment:fixed;min-height:100vh;
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  body>*{position:relative;z-index:2}
+  a{color:var(--amber2)}
+  .serif{font-family:"Frank Ruhl Libre",Georgia,serif}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(20,17,15,.74);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;gap:11px;padding:13px 22px;max-width:var(--maxw);margin:0 auto;font-weight:800}
+  .mark{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:1.2rem;
+    color:#1a1611;background:linear-gradient(140deg,var(--amber2),var(--amber));box-shadow:0 8px 22px rgba(232,163,61,.35)}
+
+  .hero{padding:60px 0 20px;text-align:center}
+  .kicker{display:inline-block;font-size:.8rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--amber);font-weight:800;
+    background:rgba(232,163,61,.08);border:1px solid rgba(232,163,61,.28);padding:7px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-family:"Frank Ruhl Libre",serif;font-weight:900;font-size:clamp(2.1rem,6vw,3.3rem);line-height:1.12;margin:.1em 0 .25em;letter-spacing:-.5px}
+  .hero p{color:var(--muted);font-size:1.12rem;max-width:560px;margin:0 auto}
+  .hero p b{color:var(--ink)}
+
+  .step{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:22px;
+    box-shadow:var(--shadow);padding:26px 28px;margin:18px 0}
+  .step-h{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .step-num{width:42px;height:42px;flex:none;border-radius:13px;display:grid;place-items:center;font-family:"Frank Ruhl Libre",serif;
+    font-weight:900;font-size:1.3rem;color:#1a1410;background:linear-gradient(140deg,var(--amber2),var(--amber))}
+  .step-h h2{font-family:"Frank Ruhl Libre",serif;font-size:1.45rem;margin:0;font-weight:900;letter-spacing:-.3px}
+  .step .sub{color:var(--muted);margin:4px 0 0}
+  .examples{margin:10px 0 0;padding:12px 16px;background:rgba(0,0,0,.2);border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:.95rem}
+  .examples b{color:var(--ink);font-weight:700}
+  .examples ul{margin:6px 0 0;padding-inline-start:20px}
+  .examples li{margin:2px 0}
+
+  .opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .opt-pill{position:relative;cursor:pointer;user-select:none}
+  .opt-pill input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+  .opt-pill span{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;border:1px solid var(--line2);
+    background:rgba(0,0,0,.22);font-weight:600;font-size:.97rem;transition:.15s}
+  .opt-pill:hover span{border-color:var(--amber);transform:translateY(-1px)}
+  .opt-pill:has(input:checked) span{background:linear-gradient(140deg,var(--amber2),var(--amber));color:#1a1410;border-color:transparent;font-weight:800}
+  .opt-pill.check:has(input:checked) span{background:rgba(82,185,166,.2);color:#cbf3e8;border-color:var(--ok);font-weight:800}
+
+  textarea,input.tx{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--line2);border-radius:12px;color:var(--ink);
+    font-family:inherit;font-size:1rem;padding:13px 15px;margin-top:14px}
+  textarea{resize:vertical;min-height:96px}
+  textarea:focus,input.tx:focus{outline:none;border-color:var(--amber)}
+  .other-tx{max-width:320px;margin-top:10px}
+
+  .btn{appearance:none;border:0;cursor:pointer;font-family:inherit;font-weight:800;font-size:1.02rem;
+    padding:14px 26px;border-radius:13px;display:inline-flex;align-items:center;gap:9px;transition:.18s;
+    background:linear-gradient(140deg,var(--amber2),var(--amber));color:#1a1410;box-shadow:0 12px 28px rgba(232,163,61,.32);margin-top:16px}
+  .btn:hover{transform:translateY(-2px)}
+  .gen-note{margin-top:14px;background:rgba(82,185,166,.08);border:1px solid rgba(82,185,166,.28);border-radius:12px;
+    padding:13px 16px;color:#cbf3e8;font-weight:600}
+  .q-list{margin:12px 0 0;padding:0;list-style:none}
+  .q-list li{margin:6px 0;font-size:1.04rem;font-weight:600}
+
+  .finish{background:linear-gradient(160deg,#2a221b,#1b1714);border:1px solid rgba(232,163,61,.4);border-radius:24px;
+    padding:34px 30px;margin:28px 0;text-align:center;box-shadow:var(--shadow)}
+  .finish .big{font-size:2.2rem;margin-bottom:6px}
+  .finish h2{font-family:"Frank Ruhl Libre",serif;font-size:1.6rem;margin:.1em 0 .4em;font-weight:900}
+  .finish .punch{font-family:"Frank Ruhl Libre",serif;font-size:1.5rem;font-weight:900;line-height:1.4;margin:18px 0;color:var(--amber2)}
+  .finish p{color:var(--muted);max-width:560px;margin:0 auto}
+  .finish .next{margin-top:20px;display:inline-block;font-weight:800;color:var(--ink);background:rgba(245,236,223,.06);
+    border:1px solid var(--line2);padding:10px 18px;border-radius:999px}
+
+  .article{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:22px;
+    padding:34px 32px;margin:18px 0 50px;box-shadow:var(--shadow)}
+  .article .tag{font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--teal);font-weight:800}
+  .article h2{font-family:"Frank Ruhl Libre",serif;font-size:1.9rem;margin:.2em 0 .1em;font-weight:900;letter-spacing:-.4px;line-height:1.2}
+  .article .byline{color:var(--faint);font-weight:700;margin-bottom:18px}
+  .article h3{font-family:"Frank Ruhl Libre",serif;font-size:1.25rem;margin:1.4em 0 .3em;font-weight:700;color:var(--amber2)}
+  .article p{color:#e8ddcb;margin:.7em 0}
+  .article ul{color:#e8ddcb;padding-inline-start:22px}
+  .article li{margin:6px 0}
+  .article li b{color:var(--ink)}
+  .article .links{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}
+  .article .links a{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;
+    background:rgba(82,185,166,.1);border:1px solid rgba(82,185,166,.3);padding:9px 14px;border-radius:11px;margin:6px 6px 0 0}
+  .article .links a:hover{background:rgba(82,185,166,.2)}
+
+  footer{text-align:center;color:var(--faint);padding:10px 0 50px;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="navin"><span class="mark">4</span><span>אתגר סוף שנה · יום 4</span></div></header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">ספירה לאחור · 4 ימים לסוף שנה</span>
+    <h1 class="serif">יום 4: המיומנות האנושית</h1>
+    <p><b>AI יכול לייצר תוכן. אנשי חינוך מייצרים משמעות.</b></p>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- שלב 1 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">1</span><h2 class="serif">תנו ל-AI לעבוד</h2></div>
+    <p class="sub">מה תרצו שהבינה המלאכותית תיצור עבורכם?</p>
+    <div class="opts">
+      <label class="opt-pill"><input type="radio" name="s1"><span>שיעור</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>משימה לתלמידים</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>דף עבודה</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>פתיחה לשיעור</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>פעילות כיתתית</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>סיכום נושא</span></label>
+      <label class="opt-pill"><input type="radio" name="s1"><span>אחר</span></label>
+    </div>
+    <input class="tx other-tx" type="text" placeholder="אחר…" />
+  </section>
+
+  <!-- שלב 2 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">2</span><h2 class="serif">תנו ל-AI משימה</h2></div>
+    <p class="sub">כתבו בקצרה את הנושא.</p>
+    <div class="examples"><b>לדוגמה:</b>
+      <ul>
+        <li>מלחמת העולם הראשונה</li>
+        <li>שינוי האקלים</li>
+        <li>משפט פיתגורס</li>
+        <li>כתיבת טיעון</li>
+      </ul>
+    </div>
+    <label style="display:block;margin-top:14px;font-weight:700">📝 הנושא שלי:</label>
+    <textarea placeholder="כתבו כאן את הנושא…"></textarea>
+  </section>
+
+  <!-- שלב 3 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">3</span><h2 class="serif">תוצר ה-AI</h2></div>
+    <p class="sub">🤖 לחצו על "צור" — והמערכת מייצרת את התוצר.</p>
+    <button class="btn" id="genBtn">🤖 צור</button>
+    <div class="gen-note" id="genNote" hidden>פתחו את כלי ה-AI שלכם (ChatGPT · Gemini · Copilot), צרו את התוצר לפי הבחירה והנושא שלכם — ואז המשיכו לשלב הבא 👇</div>
+  </section>
+
+  <!-- שלב 4 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">4</span><h2 class="serif">עכשיו מגיע החלק החשוב</h2></div>
+    <p class="sub">הסתכלו על התוצר ושאלו את עצמכם: מה חסר כאן כדי שהתלמידים שלי באמת יתחברו אליו?</p>
+    <div class="opts">
+      <label class="opt-pill check"><input type="checkbox"><span>סיפור אמיתי</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>דוגמה מהכיתה</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>קשר לעולם של התלמיד</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>שאלה מעוררת חשיבה</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>דיון ערכי</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>רגש</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>הומור</span></label>
+      <label class="opt-pill check"><input type="checkbox"><span>אחר</span></label>
+    </div>
+    <input class="tx other-tx" type="text" placeholder="אחר…" />
+  </section>
+
+  <!-- שלב 5 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">5</span><h2 class="serif">המיומנות האנושית</h2></div>
+    <p class="sub">איזו מיומנות אנושית תוכל להוסיף הכי הרבה ערך לתוצר?</p>
+    <div class="opts">
+      <label class="opt-pill"><input type="radio" name="s5"><span>חשיבה ביקורתית</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>יצירתיות</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>שיתוף פעולה</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>שיקול דעת</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>אמפתיה</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>למידה עצמאית</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>פתרון בעיות</span></label>
+      <label class="opt-pill"><input type="radio" name="s5"><span>אחר</span></label>
+    </div>
+    <input class="tx other-tx" type="text" placeholder="אחר…" />
+  </section>
+
+  <!-- שלב 7 -->
+  <section class="step">
+    <div class="step-h"><span class="step-num">7</span><h2 class="serif">השאלה הגדולה</h2></div>
+    <p class="sub">AI יודע לעשות הרבה. אבל… כתבו דבר אחד בלבד ש:</p>
+    <ul class="q-list">
+      <li>❌ AI לא מכיר</li>
+      <li>❌ גוגל לא יודע</li>
+      <li>❌ ספר לימוד לא יכול ללמד</li>
+      <li>✅ אבל אתם מביאים בכל יום לכיתה</li>
+    </ul>
+    <label style="display:block;margin-top:14px;font-weight:700">📝 תשובה:</label>
+    <textarea placeholder="כתבו כאן…"></textarea>
+  </section>
+
+  <!-- מסך סיום -->
+  <section class="finish">
+    <div class="big">🎯</div>
+    <h2 class="serif">אם הגעתם עד לכאן, כנראה שהבנתם את הרעיון המרכזי של היום</h2>
+    <div class="punch">AI יכול לייצר תוכן.<br/>אנשי חינוך מייצרים משמעות.</div>
+    <p>ככל שהבינה המלאכותית משתפרת, כך גדל הערך של היכולות האנושיות: חשיבה, שיקול דעת, יצירתיות, אמפתיה והיכרות עם הלומדים.</p>
+    <span class="next">נתראה ביום 3 👋</span>
+  </section>
+
+  <!-- מאמר הרחבה -->
+  <article class="article">
+    <div class="tag">מאמר הרחבה</div>
+    <h2 class="serif">אם AI יודע הכל, מה נשאר לנו ללמד?</h2>
+    <div class="byline">ינון זנו</div>
+
+    <p>הבינה המלאכותית נכנסה לחיים שלנו בסערה. מה שהתחיל ככלי ניסיוני הפך מהר מאוד לעוזר אישי, מורה פרטי, מתכנת ושותף מלא לחשיבה. אנחנו יכולים היום להפיק בשניות סיכומי שיעור, פתרונות לתרגילים מורכבים, מצגות שלמות ואפילו לקבל תשובות מותאמות אישית לבגרות.</p>
+    <p>לנוכח המציאות הזו הרבה אנשי חינוך שואלים את עצמם: אם ה-AI יודע לעשות כל כך הרבה, מה התפקיד שלנו כמורים? השאלה הזו לא מגיעה רק מסקרנות טכנולוגית. היא נוגעת בבסיס העשייה שלנו: מה באמת חשוב ללמד בעולם שבו כל המידע זמין בלחיצת כפתור?</p>
+
+    <h3>התחרות היא לא על ידע</h3>
+    <p>הטעות הכי גדולה בדיון הזה היא ההנחה שאנחנו בתחרות מול המכונה על ידע. אבל בית הספר מעולם לא נועד להיות אנציקלופדיה. גם לפני ה-ChatGPT היו כאן ספרים, מנועי חיפוש ומאגרי מידע. הייחוד של החינוך אף פעם לא היה הנגשת המידע עצמו אלא היכולת לקחת את המידע הזה, להפוך אותו להבנה חותכת ולהפוך את ההבנה למשמעות ולפעולה.</p>
+    <p>AI יכול לזרוק עלינו מידע אינסופי. הוא פשוט לא יכול להחליט בשבילנו מה מוסרי, מה נכון בהקשר מסוים או מה באמת משמעותי לתלמיד.</p>
+
+    <h3>הידע לא נעלם – התפקיד שלו השתנה</h3>
+    <p>פעם הערכנו תלמידים לפי הכמות שהם זוכרים. מי שידע לשלוף עובדות, תאריכים ונוסחאות נחשב לחזק יותר. היום היכולת החשובה היא כבר לא רק "לדעת". היכולת החשובה היא להבין, לבקר, ליישם ולשאול שאלות חכמות. למעשה, OECD מדגיש כי בעולם שבו המידע זמין לכולם, הערך עובר מהידיעה עצמה ליכולת להשתמש בידע באופן מושכל, ביקורתי ואחראי.</p>
+    <p>דווקא בגלל שהמידע כל כך נגיש אנחנו חייבים ללמד את התלמידים איך להבחין בין מידע איכותי לפייק ניוז, בין עובדה לדעה ובין תשובה שנשמעת נכונה לתשובה אמיתית שיש לה משמעות.</p>
+
+    <h3>האשליה של העבודה המושלמת</h3>
+    <p>קחו לדוגמה עבודה להגשה. תלמיד אחד כותב אותה בעצמו במשך שלוש שעות. תלמיד שני מבקש מה-AI לכתוב אותה בשתי דקות. סביר להניח שהעבודה של התלמיד השני תהיה מנוסחת טוב יותר ואפילו מקיפה יותר. אבל האם הוא באמת למד משהו? לא בטוח.</p>
+    <p>הפער הוא לא בתוצר הסופי אלא בתהליך החשיבה. מי בחר את המקורות? מי אימת את המידע? מי זיהה הנחות סמויות, חיבר בין הרעיונות ושאל את השאלות החדשות? הלמידה האמיתית קורית בראש, לא בהקלדה.</p>
+
+    <h3>המיומנויות שעושות את ההבדל</h3>
+    <p>מגמה זו אינה רק תחושה של אנשי חינוך. על פי World Economic Forum, המיומנויות המבוקשות ביותר בשנים הקרובות יהיו חשיבה אנליטית, יצירתיות, למידה מתמשכת, גמישות ויכולת לעבוד עם אנשים. ככל שהטכנולוגיה מתקדמת המיומנויות האנושיות שלנו הופכות לקריטיות יותר:</p>
+    <ul>
+      <li><b>חשיבה ביקורתית:</b> היכולת להטיל ספק, לזהות הטיות ולהעריך מקורות בעיניים פקוחות.</li>
+      <li><b>יצירתיות:</b> AI יודע למקסס מידע קיים. אנחנו יודעים לדמיין אפשרויות חדשות ולחבר עולמות תוכן רחוקים.</li>
+      <li><b>שיתוף פעולה:</b> למידה היא לא רק תהליך טכני אלא דיאלוג אנושי בגובה העיניים.</li>
+      <li><b>שיקול דעת:</b> היכולת לקבל החלטות במצבי אי-ודאות ולהפעיל שיפוט מוסרי וערכי.</li>
+    </ul>
+
+    <h3>אז למה המורה עדיין רלוונטי? אולי יותר מתמיד</h3>
+    <p>AI יכול להסביר חומר מצוין. המורה יודע לאיזה תלמיד צריך להסביר אותו אחרת. AI יכול לייצר תרגיל מדויק. המורה יודע מי מהתלמידים ייכנס לחרדה מולו. AI יכול לנסח הודעה תקנית להורים. המורה יודע אילו מילים יבנו שם אמון אמיתי.</p>
+    <p>הערך שלנו כאנשי חינוך לא מגיע רק ממה שאנחנו יודעים. הוא נובע מהיכולת שלנו לראות את הילד שמולנו, להבין את הצרכים שלו, לאתגר אותו, להאמין בו ולעזור לו לצמוח. אלו יכולות אנושיות נטו.</p>
+
+    <h3>האתגר האמיתי של מערכת החינוך</h3>
+    <p>האתגר שלנו הוא לא לנצח את הבינה המלאכותית אלא לעבוד איתה חכם. במקום לשאול "איך AI יכול להחליף אותנו?", אנחנו צריכים לשאול: "איך AI יכול לפנות לנו זמן כדי לעשות את מה שרק אנחנו יכולים לעשות?". ברגע שהטכנולוגיה לוקחת עליה את המשימות הטכניות והשחורות נפתח לנו חלון אדיר להשקיע יותר בשיחות אישיות, בחשיבה משותפת ובפיתוח מיומנויות לחיים.</p>
+    <p>הבינה המלאכותית לא מסמנת את סוף החינוך אלא פותחת לנו פרק חדש ומרתק. השאלה היום היא כבר לא "מה התלמיד יודע?" אלא "מה התלמיד יודע לעשות עם מה שהוא יודע?". וכאן, דווקא כאן, המקום שלנו כאנשי חינוך הופך למשמעותי מתמיד.</p>
+
+    <div class="links">
+      <a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank" rel="noopener">🔗 UNESCO – Generative AI in Education</a>
+      <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2025/" target="_blank" rel="noopener">🔗 Future of Jobs Report 2025</a>
+      <a href="https://www.oecd.org/education/2030-project/" target="_blank" rel="noopener">🔗 OECD Future of Education and Skills 2030</a>
+      <a href="https://tech.ed.gov/ai/future-of-teaching-and-learning/" target="_blank" rel="noopener">🔗 AI and the Future of Teaching and Learning</a>
+    </div>
+  </article>
+
+</main>
+
+<footer>אתגר סוף שנה · יום 4 · המיומנות האנושית</footer>
+
+<script>
+  document.getElementById('genBtn').addEventListener('click',function(){
+    document.getElementById('genNote').hidden=false;
+  });
+</script>
+</body>
+</html>
