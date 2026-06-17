@@ -1,0 +1,112 @@
+/* ============================================================
+   נבחרת AI בלשון — התאמות מעבר ל-Tailwind
+   "Neo-Hebrew Tech" · RTL · מצב כהה כברירת מחדל
+   ============================================================ */
+
+/* ---------- מערכת צבעים (CSS variables) ---------- */
+:root,
+:root[data-theme="dark"]{
+  --bg:#0B1020;
+  --surface:#141A2E;
+  --surface-2:#1B2440;
+  --ink:#E6E8F0;
+  --muted:#9aa3bd;
+  --primary:#7C5CFF;   /* אקסנט ראשי — סגול */
+  --secondary:#22D3EE; /* אקסנט משני — ציאן */
+  --amber:#FBBF24;     /* הדגשה — ענבר */
+  --line:rgba(255,255,255,.10);
+  --glass:rgba(255,255,255,.05);
+  --glass-brd:rgba(255,255,255,.12);
+  --shadow:0 24px 60px rgba(0,0,0,.45);
+}
+
+/* ---------- מצב בהיר ---------- */
+:root[data-theme="light"]{
+  --bg:#F5F6FC;
+  --surface:#ffffff;
+  --surface-2:#eef0fb;
+  --ink:#171a2b;
+  --muted:#5a627e;
+  --primary:#6D45F5;
+  --secondary:#0aa6c4;
+  --amber:#C77F00;
+  --line:rgba(20,24,46,.10);
+  --glass:rgba(255,255,255,.65);
+  --glass-brd:rgba(20,24,46,.10);
+  --shadow:0 24px 50px rgba(40,46,90,.16);
+}
+
+/* ---------- בסיס ---------- */
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Assistant",system-ui,sans-serif;
+  transition:background .35s ease,color .35s ease;
+}
+h1,h2,h3,h4,.font-rubik{font-family:"Rubik","Assistant",sans-serif}
+
+/* ---------- גרדיאנט חתימה ---------- */
+.text-grad{
+  background:linear-gradient(120deg,var(--secondary),var(--primary));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.btn-grad{
+  background:linear-gradient(120deg,var(--primary),var(--secondary));
+  color:#fff;box-shadow:0 12px 30px rgba(124,92,255,.45);
+}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(124,92,255,.6)}
+
+/* ---------- glassmorphism ---------- */
+.glass{
+  background:var(--glass);
+  border:1px solid var(--glass-brd);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+/* ---------- glow ---------- */
+.glow-primary{box-shadow:0 0 0 1px rgba(124,92,255,.35),0 0 34px rgba(124,92,255,.35)}
+
+/* ---------- רקע mesh-gradient ל-Hero ---------- */
+.mesh{
+  background:
+    radial-gradient(48% 60% at 18% 22%,rgba(124,92,255,.40),transparent 60%),
+    radial-gradient(46% 56% at 82% 18%,rgba(34,211,238,.34),transparent 60%),
+    radial-gradient(60% 70% at 70% 88%,rgba(251,191,36,.16),transparent 60%),
+    radial-gradient(50% 60% at 30% 92%,rgba(124,92,255,.22),transparent 60%);
+}
+
+/* ---------- אות עברית גרפית גדולה ברקע מקטע ---------- */
+.bg-letter{
+  position:absolute;font-family:"Rubik",sans-serif;font-weight:900;
+  line-height:1;color:var(--ink);opacity:.04;pointer-events:none;user-select:none;
+  font-size:clamp(180px,32vw,460px);z-index:0;
+}
+
+/* ---------- אותיות צפות ב-Hero ---------- */
+.float-letter{
+  position:absolute;font-family:"Rubik",sans-serif;font-weight:800;
+  color:var(--primary);opacity:.22;pointer-events:none;user-select:none;
+  animation:floaty 9s ease-in-out infinite;
+}
+@keyframes floaty{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-26px) rotate(4deg)}
+}
+
+/* ---------- כניסה ב-scroll ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* ---------- focus נגיש ---------- */
+a:focus-visible,button:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible{
+  outline:3px solid var(--secondary);outline-offset:3px;border-radius:8px;
+}
+
+/* ---------- כיבוד prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  .reveal{opacity:1;transform:none}
+}
