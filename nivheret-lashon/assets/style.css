@@ -95,6 +95,25 @@ h1,h2,h3,h4,.font-rubik{font-family:"Rubik","Assistant",sans-serif}
   50%{transform:translateY(-26px) rotate(4deg)}
 }
 
+/* ---------- צ'יפי סינון ותגיות (מאגר הכלים) ---------- */
+.filter-chip{
+  font-family:"Assistant",sans-serif;font-weight:600;font-size:.9rem;
+  padding:.45rem 1rem;border-radius:999px;cursor:pointer;
+  color:var(--muted);background:var(--glass);border:1px solid var(--glass-brd);
+  transition:.18s;
+}
+.filter-chip:hover{color:var(--ink)}
+.filter-chip.is-active{
+  color:#fff;border-color:transparent;
+  background:linear-gradient(120deg,var(--primary),var(--secondary));
+  box-shadow:0 8px 20px rgba(124,92,255,.4);
+}
+.tag,.tag-aud{
+  font-size:.72rem;font-weight:700;padding:.18rem .6rem;border-radius:999px;
+}
+.tag{color:var(--secondary);background:color-mix(in srgb,var(--secondary) 16%,transparent)}
+.tag-aud{color:var(--amber);background:color-mix(in srgb,var(--amber) 18%,transparent)}
+
 /* ---------- כניסה ב-scroll ---------- */
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
 .reveal.is-visible{opacity:1;transform:none}
