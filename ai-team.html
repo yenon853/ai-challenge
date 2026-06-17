@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>נבחרת ה-AI · צוות החדשנות הבית-ספרי</title>
+<meta name="description" content="נבחרת ה-AI — המורים שמובילים את הלמידה הדיגיטלית לעידן הבינה המלאכותית. יוצרים, מנסים ומובילים שינוי." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --indigo:#4F46E5; --indigo-700:#4338CA; --violet:#7C3AED; --indigo-300:#A5B4FC;
+    --orange:#EA580C; --orange-hover:#C2410C;
+    --ink:#1E1B4B; --ink-2:#334155; --muted:#64748B;
+    --bg:#EEF2FF; --card:#ffffff; --line:#E0E7FF; --line-2:#C7D2FE;
+    --dark:#0F172A; --dark-2:#1E1B4B;
+    --on-dark:#F8FAFC; --on-dark-muted:#C7D2FE;
+    --shadow:0 20px 50px rgba(30,27,75,.14);
+    --shadow-sm:0 8px 24px rgba(30,27,75,.10);
+    --r:18px; --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;
+    font-family:"Heebo",-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .rubik{font-family:"Rubik","Heebo",sans-serif}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  h1,h2,h3{font-family:"Rubik","Heebo",sans-serif;letter-spacing:-.5px;line-height:1.12;margin:0}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(238,242,255,.82);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 22px;max-width:var(--maxw);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:11px;font-family:"Rubik";font-weight:800;font-size:1.12rem}
+  .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;
+    background:linear-gradient(135deg,var(--indigo),var(--violet));box-shadow:0 8px 20px rgba(79,70,229,.4)}
+  nav.links{display:flex;gap:4px;align-items:center}
+  nav.links a{font-size:.95rem;color:var(--ink-2);text-decoration:none;padding:9px 13px;border-radius:10px;font-weight:600;transition:.18s}
+  nav.links a:hover{color:var(--indigo);background:rgba(79,70,229,.08)}
+  @media(max-width:720px){nav.links a:not(.btn){display:none}}
+  .btn{appearance:none;border:0;cursor:pointer;font-family:"Rubik";font-weight:700;font-size:1rem;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:13px;transition:.18s;letter-spacing:-.2px}
+  .btn.cta{background:var(--orange);color:#fff;box-shadow:0 12px 26px rgba(234,88,12,.32)}
+  .btn.cta:hover{background:var(--orange-hover);transform:translateY(-2px)}
+  .btn.sm{padding:10px 18px;font-size:.95rem}
+  .btn.ghost-d{background:rgba(255,255,255,.08);color:var(--on-dark);border:1px solid rgba(255,255,255,.25)}
+  .btn.ghost-d:hover{background:rgba(255,255,255,.16)}
+  .btn.indigo{background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;box-shadow:0 12px 26px rgba(79,70,229,.34)}
+  .btn.indigo:hover{transform:translateY(-2px)}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--dark-2),var(--dark));color:var(--on-dark)}
+  .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none}
+  .hero::before{width:460px;height:460px;background:var(--indigo);top:-140px;left:-80px}
+  .hero::after{width:420px;height:420px;background:var(--violet);bottom:-160px;right:-60px}
+  .heroin{position:relative;z-index:2;text-align:center;padding:84px 0 92px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.85rem;color:var(--indigo-300);
+    background:rgba(165,180,252,.12);border:1px solid rgba(165,180,252,.3);padding:8px 16px;border-radius:999px;margin-bottom:24px}
+  .dot{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 12px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:900}
+  .hero h1 .grad{background:linear-gradient(100deg,#818cf8,#c4b5fd 60%,#f0abfc);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{color:var(--on-dark-muted);font-size:1.2rem;max-width:620px;margin:20px auto 32px}
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:50px}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 26px;min-width:140px}
+  .stat b{display:block;font-family:"Rubik";font-weight:900;font-size:2rem;background:linear-gradient(120deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{font-size:.88rem;color:var(--on-dark-muted)}
+
+  /* sections */
+  section{padding:72px 0}
+  .sechead{text-align:center;max-width:640px;margin:0 auto 44px}
+  .kicker{font-family:"Rubik";font-size:.8rem;letter-spacing:1.8px;text-transform:uppercase;color:var(--indigo);font-weight:800;margin-bottom:10px}
+  .sechead h2{font-size:clamp(1.9rem,4.2vw,2.7rem);font-weight:800}
+  .sechead p{color:var(--muted);margin:10px 0 0;font-size:1.08rem}
+
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media(max-width:900px){.pillars{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;transition:.2s;box-shadow:var(--shadow-sm)}
+  .pillar:hover{transform:translateY(-4px);border-color:var(--line-2);box-shadow:var(--shadow)}
+  .picon{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;color:#fff;margin-bottom:16px;
+    background:linear-gradient(135deg,var(--indigo),var(--violet))}
+  .pillar h3{font-size:1.2rem;font-weight:700;margin-bottom:7px}
+  .pillar p{color:var(--muted);font-size:.97rem;margin:0}
+
+  /* members */
+  .members{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.members{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.members{grid-template-columns:1fr}}
+  .member{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;align-items:center;gap:15px;transition:.2s;box-shadow:var(--shadow-sm)}
+  .member:hover{transform:translateY(-3px);border-color:var(--line-2)}
+  .avatar{width:58px;height:58px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-family:"Rubik";font-weight:800;font-size:1.25rem}
+  .member h3{font-size:1.08rem;font-weight:700}
+  .member span{color:var(--indigo);font-weight:600;font-size:.9rem}
+
+  /* projects bento */
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:820px){.bento{grid-template-columns:1fr}}
+  .proj{border-radius:var(--r);padding:26px;color:#fff;position:relative;overflow:hidden;min-height:172px;display:flex;flex-direction:column;justify-content:flex-end}
+  .proj h3{font-size:1.3rem;font-weight:800;margin-bottom:6px}
+  .proj p{margin:0;opacity:.92;font-size:.96rem}
+  .proj.p1{background:linear-gradient(140deg,#4F46E5,#7C3AED)}
+  .proj.p2{background:linear-gradient(140deg,#0F172A,#1E1B4B)}
+  .proj.p3{background:linear-gradient(140deg,#EA580C,#DB2777)}
+  .proj .pi{position:absolute;top:20px;left:20px;opacity:.35}
+
+  /* join */
+  .join{background:linear-gradient(160deg,var(--dark-2),var(--dark));color:var(--on-dark);border-radius:26px;
+    padding:56px 30px;text-align:center;position:relative;overflow:hidden}
+  .join::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:var(--violet);filter:blur(80px);opacity:.4;top:-120px;right:-60px}
+  .join h2{position:relative;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900}
+  .join p{position:relative;color:var(--on-dark-muted);max-width:520px;margin:14px auto 28px;font-size:1.08rem}
+  .join .hero-cta{position:relative}
+
+  footer{text-align:center;color:var(--muted);padding:40px 0 56px;font-size:.9rem}
+  footer .brand{justify-content:center;margin-bottom:10px}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="navin">
+    <div class="brand">
+      <span class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 7.7 8 10 4.6-2.3 8-5 8-10V6l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      נבחרת ה-AI
+    </div>
+    <nav class="links">
+      <a href="#about">אודות</a>
+      <a href="#do">מה אנחנו עושים</a>
+      <a href="#team">חברי הנבחרת</a>
+      <a href="#projects">פרויקטים</a>
+      <a href="#join" class="btn cta sm">הצטרפו</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="wrap heroin">
+    <span class="eyebrow"><span class="dot"></span> צוות החדשנות הבית-ספרי</span>
+    <h1 class="rubik">נבחרת ה-<span class="grad">AI</span></h1>
+    <p class="lead">המורים שמובילים את הלמידה הדיגיטלית לעידן הבינה המלאכותית — יוצרים, מנסים, ומובילים שינוי אמיתי בכיתה.</p>
+    <div class="hero-cta">
+      <a href="#join" class="btn cta">הצטרפו לנבחרת ←</a>
+      <a href="#do" class="btn ghost-d">מה אנחנו עושים</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>12</b><span>מורים בנבחרת</span></div>
+      <div class="stat"><b>30+</b><span>כלי AI בשימוש</span></div>
+      <div class="stat"><b>5</b><span>פרויקטים פעילים</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section id="do">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">מה אנחנו עושים</div>
+      <h2>ארבעה תחומי פעולה</h2>
+      <p>הנבחרת לוקחת את ה-AI מהבאזז אל הכיתה — בעבודה מעשית, אחראית ומבוססת מקצועיות.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="picon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6.5L5.2 18A2 2 0 0 0 7 21h10a2 2 0 0 0 1.8-2.9L14 9.5V3"/><path d="M7.5 15h9"/></svg></div>
+        <h3>התנסות וחדשנות</h3>
+        <p>בודקים כלי AI חדשים, מסננים את ההייפ, ומביאים רק את מה שבאמת עובד לכיתה.</p>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M13 3v5h5M8 13h6M8 17h6"/></svg></div>
+        <h3>פיתוח חומרים</h3>
+        <p>יוצרים שיעורים, מטלות ופעילויות מבוססות AI — מוכנים לשימוש על ידי כלל הצוות.</p>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-4-4"/><path d="M8 11a4 4 0 1 1 4-4"/><path d="M2 21a6 6 0 0 1 12 0M10 21a6 6 0 0 1 12 0"/></svg></div>
+        <h3>הדרכת עמיתים</h3>
+        <p>מלווים ומכשירים את צוות המורים — סדנאות, ליווי אישי וקהילת למידה.</p>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></div>
+        <h3>הובלה פדגוגית</h3>
+        <p>מעצבים את מדיניות ה-AI הבית-ספרית: אתיקה, פרטיות ושימוש אחראי.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" style="background:#fff;border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">חברי הנבחרת</div>
+      <h2>הצוות שמוביל</h2>
+      <p>מורים ומורות מכל תחומי הדעת, שחולקים סקרנות אחת — איך ה-AI יהפוך את הלמידה לטובה יותר.</p>
+    </div>
+    <div class="members">
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">ינ</div><div><h3>ינון זנו</h3><span>רכז הנבחרת</span></div></div>
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#EA580C,#DB2777)">חב</div><div><h3>חבר/ת נבחרת</h3><span>מתמטיקה</span></div></div>
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#0EA5E9,#4F46E5)">חב</div><div><h3>חבר/ת נבחרת</h3><span>שפה ולשון</span></div></div>
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#10B981,#0EA5E9)">חב</div><div><h3>חבר/ת נבחרת</h3><span>מדעים</span></div></div>
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#7C3AED,#DB2777)">חב</div><div><h3>חבר/ת נבחרת</h3><span>היסטוריה</span></div></div>
+      <div class="member"><div class="avatar" style="background:linear-gradient(135deg,#F59E0B,#EA580C)">חב</div><div><h3>חבר/ת נבחרת</h3><span>אנגלית</span></div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:.9rem;margin-top:18px">↞ החליפו את השמות והתחומים בחברי הנבחרת האמיתיים שלכם</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sechead">
+      <div class="kicker">פרויקטים</div>
+      <h2>מה יצא לנו מהידיים</h2>
+      <p>יוזמות שהנבחרת מובילה ברחבי בית הספר.</p>
+    </div>
+    <div class="bento">
+      <div class="proj p1">
+        <span class="pi"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg></span>
+        <h3>מסע 5 ימים ל-AI</h3>
+        <p>אתגר סוף שנה לכל הצוות — עיקרון ביום, חוויתי וקצר.</p>
+      </div>
+      <div class="proj p2">
+        <span class="pi"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round"/></svg></span>
+        <h3>ספריית פרומפטים</h3>
+        <p>מאגר פרומפטים בדוקים, מסודר לפי מקצוע ומשימה.</p>
+      </div>
+      <div class="proj p3">
+        <span class="pi"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke-linecap="round"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <h3>סדנת AI לצוות</h3>
+        <p>הכשרה מעשית למורים — מהיכרות ראשונה ועד שילוב בכיתה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="wrap">
+    <div class="join">
+      <h2 class="rubik">רוצים להיות חלק מהנבחרת?</h2>
+      <p>מחפשים מורים סקרנים שרוצים להוביל, להתנסות ולעצב את עתיד הלמידה. לא צריך להיות מומחים — רק להיות בעניין.</p>
+      <div class="hero-cta">
+        <a href="mailto:yenon853@gmail.com?subject=הצטרפות%20לנבחרת%20ה-AI" class="btn cta">אני רוצה להצטרף ←</a>
+        <a href="#do" class="btn ghost-d">עוד על מה שאנחנו עושים</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 7.7 8 10 4.6-2.3 8-5 8-10V6l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span> נבחרת ה-AI</div>
+    <p>צוות החדשנות הבית-ספרי · מובילים את החינוך לעידן הבינה המלאכותית</p>
+  </div>
+</footer>
+
+</body>
+</html>
